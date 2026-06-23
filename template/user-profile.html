@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil & Pengaturan - AL Faiz</title>
+  <!-- Google Fonts & Bootstrap 5 & FontAwesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand font-heading text-primary-custom" href="index.html" style="font-weight: 800; font-size: 1.5rem; letter-spacing: 2px;">
+        AL <span class="text-gold">FAIZ</span>
+      </a>
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <a href="#" class="theme-toggle-btn text-dark-emphasis p-2" title="Ganti Mode">
+          <i class="theme-toggle-icon fa-solid fa-moon fs-5"></i>
+        </a>
+        <a href="index.html" class="btn btn-outline-primary-custom btn-sm px-3 rounded-pill">Home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <!-- Sidebar (Left) -->
+      <div class="col-lg-3 col-md-4 sidebar-layout px-0">
+        <div class="text-center py-4 border-bottom border-secondary-subtle">
+          <img id="sidebar-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" alt="Avatar" class="rounded-circle mb-2 border border-3 border-color" style="width: 80px; height: 80px; object-fit: cover;">
+          <h5 class="mb-1 font-heading text-color h6" id="sidebar-name">Budi Pratama</h5>
+          <span class="badge bg-gold-custom text-white small">Siswa Al Faiz</span>
+        </div>
+        
+        <div class="py-3">
+          <a href="user-dashboard.html" class="sidebar-link"><i class="fa-solid fa-gauge"></i> Dashboard Saya</a>
+          <a href="user-learning.html" class="sidebar-link"><i class="fa-solid fa-book-open"></i> My Learning</a>
+          <a href="user-bookmarks.html" class="sidebar-link"><i class="fa-solid fa-bookmark"></i> Bookmark</a>
+          <a href="user-history.html" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Riwayat Belajar</a>
+          <a href="user-profile.html" class="sidebar-link active"><i class="fa-solid fa-user-gear"></i> Profil & Pengaturan</a>
+          <hr class="border-secondary-subtle my-2">
+          <a href="#" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+        </div>
+      </div>
+
+      <!-- Content (Right) -->
+      <div class="col-lg-9 col-md-8 p-4 p-lg-5">
+        <div class="mb-4">
+          <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">PENGATURAN AKUN</span>
+          <h1 class="font-heading h3 text-color">Profil Saya</h1>
+          <p class="text-muted small">Kelola informasi profil, email, dan kata sandi keamanan Anda.</p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Edit Profile (Col 1) -->
+          <div class="col-lg-6">
+            <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
+              <h3 class="font-heading h5 mb-3 border-bottom pb-2">Informasi Profil</h3>
+              
+              <div id="profile-alert" class="alert alert-success d-none" role="alert"></div>
+
+              <form id="profile-form">
+                <div class="mb-3">
+                  <label for="profile-nama" class="form-label small text-muted">Nama Lengkap</label>
+                  <input type="text" class="form-control form-control-custom" id="profile-nama" value="Budi Pratama" required>
+                </div>
+                <div class="mb-3">
+                  <label for="profile-email" class="form-label small text-muted">Alamat Email</label>
+                  <input type="email" class="form-control form-control-custom" id="profile-email" value="user@alfaiz.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small text-muted d-block">Foto Profil</label>
+                  <div class="d-flex align-items-center gap-3">
+                    <img id="form-avatar-preview" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="rounded-circle border border-secondary-subtle" style="width: 55px; height: 55px; object-fit: cover;" alt="Avatar Preview">
+                    <input type="text" class="form-control form-control-custom small" id="profile-photo-url" value="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" placeholder="Masukkan URL Foto Baru">
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary-custom py-2 px-4 border-0 bg-primary-custom text-white font-heading mt-2">SIMPAN PERUBAHAN</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Change Password (Col 2) -->
+          <div class="col-lg-6">
+            <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
+              <h3 class="font-heading h5 mb-3 border-bottom pb-2">Ganti Kata Sandi</h3>
+              
+              <div id="password-alert" class="alert d-none" role="alert"></div>
+
+              <form id="password-form">
+                <div class="mb-3">
+                  <label for="old-pass" class="form-label small text-muted">Kata Sandi Lama</label>
+                  <input type="password" class="form-control form-control-custom" id="old-pass" placeholder="••••••••" required>
+                </div>
+                <div class="mb-3">
+                  <label for="new-pass" class="form-label small text-muted">Kata Sandi Baru</label>
+                  <input type="password" class="form-control form-control-custom" id="new-pass" minlength="6" placeholder="Min. 6 karakter" required>
+                </div>
+                <div class="mb-3">
+                  <label for="confirm-new-pass" class="form-label small text-muted">Ulangi Kata Sandi Baru</label>
+                  <input type="password" class="form-control form-control-custom" id="confirm-new-pass" minlength="6" placeholder="Ulangi kata sandi baru" required>
+                </div>
+                
+                <button type="submit" class="btn btn-gold-custom py-2 px-4 border-0 bg-gold-custom text-white font-heading mt-2">GANTI KATA SANDI</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Dependencies -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Form profile submit simulation
+      $('#profile-form').on('submit', function(e) {
+        e.preventDefault();
+        const nama = $('#profile-nama').val().trim();
+        const photo = $('#profile-photo-url').val().trim();
+
+        $('#sidebar-name').text(nama);
+        $('#sidebar-avatar').attr('src', photo);
+        $('#form-avatar-preview').attr('src', photo);
+
+        $('#profile-alert').removeClass('d-none').text("Profil Anda berhasil diperbarui (Simulasi)!");
+      });
+
+      // Form password submit simulation
+      $('#password-form').on('submit', function(e) {
+        e.preventDefault();
+        const newPass = $('#new-pass').val();
+        const confirmPass = $('#confirm-new-pass').val();
+
+        if (newPass !== confirmPass) {
+          $('#password-alert').removeClass('d-none alert-success').addClass('alert-danger').text("Konfirmasi kata sandi tidak cocok.");
+          return;
+        }
+
+        $('#password-alert').removeClass('d-none alert-danger').addClass('alert-success').text("Kata sandi berhasil diperbarui (Simulasi)!");
+        $('#password-form')[0].reset();
+      });
+    });
+  </script>
+</body>
+</html>

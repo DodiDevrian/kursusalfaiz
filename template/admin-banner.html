@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Banner - Admin AL Faiz</title>
+  <!-- Google Fonts & Bootstrap 5 & FontAwesome -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand font-heading text-primary-custom" href="index.html" style="font-weight: 800; font-size: 1.5rem; letter-spacing: 2px;">
+        AL <span class="text-gold">FAIZ</span> <span class="badge bg-danger ms-2 fs-6" style="vertical-align:middle;">ADMIN</span>
+      </a>
+      <div class="d-flex align-items-center gap-3 ms-auto">
+        <a href="#" class="theme-toggle-btn text-dark-emphasis p-2" title="Ganti Mode">
+          <i class="theme-toggle-icon fa-solid fa-moon fs-5"></i>
+        </a>
+        <a href="index.html" class="btn btn-outline-danger btn-sm px-3 rounded-pill">Lihat Website</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <!-- Admin Sidebar -->
+      <div class="col-lg-3 col-md-4 sidebar-layout px-0">
+        <div class="text-center py-4 border-bottom border-secondary-subtle">
+          <img id="admin-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60" alt="Avatar" class="rounded-circle mb-2 border border-3 border-danger" style="width: 80px; height: 80px; object-fit: cover;">
+          <h5 class="mb-1 font-heading text-color h6" id="admin-name">Al Faiz Admin</h5>
+          <span class="badge bg-danger text-white small">Super Admin</span>
+        </div>
+        
+        <div class="py-3">
+          <a href="admin-dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+          <a href="admin-categories.html" class="sidebar-link"><i class="fa-solid fa-folder-tree"></i> Kategori</a>
+          <a href="admin-courses.html" class="sidebar-link"><i class="fa-solid fa-graduation-cap"></i> Course / Kelas</a>
+          <a href="admin-lessons.html" class="sidebar-link"><i class="fa-solid fa-book"></i> Materi Pelajaran</a>
+          <a href="admin-users.html" class="sidebar-link"><i class="fa-solid fa-users"></i> Pelajar / User</a>
+          <a href="admin-comments.html" class="sidebar-link"><i class="fa-solid fa-comments"></i> Komentar</a>
+          <a href="admin-faq.html" class="sidebar-link"><i class="fa-solid fa-circle-question"></i> FAQ Website</a>
+          <a href="admin-banner.html" class="sidebar-link active"><i class="fa-solid fa-images"></i> Banner / Slider</a>
+          <a href="admin-settings.html" class="sidebar-link"><i class="fa-solid fa-gears"></i> Pengaturan Web</a>
+          <hr class="border-secondary-subtle my-2">
+          <a href="#" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="col-lg-9 col-md-8 p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-end mb-4">
+          <div>
+            <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">MEDIA PROMOSI</span>
+            <h1 class="font-heading h3 text-color mb-0">Kelola Banner Promo</h1>
+          </div>
+          <button class="btn btn-danger px-4 border-0 bg-primary-custom text-white" data-bs-toggle="modal" data-bs-target="#bannerModal" id="add-banner-btn"><i class="fa-solid fa-plus me-1"></i> Tambah Banner</button>
+        </div>
+
+        <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
+          <div class="table-responsive">
+            <table class="table table-custom align-middle mb-0">
+              <thead>
+                <tr>
+                  <th scope="col" class="font-heading small py-3" style="width: 20%;">Banner Preview</th>
+                  <th scope="col" class="font-heading small py-3" style="width: 25%;">Judul Promo</th>
+                  <th scope="col" class="font-heading small py-3" style="width: 35%;">Deskripsi Subtitle</th>
+                  <th scope="col" class="font-heading small py-3 text-end" style="width: 20%;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="banners-tbody">
+                <!-- Banner 1 -->
+                <tr>
+                  <td>
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&auto=format&fit=crop&q=80" class="rounded shadow-sm border border-secondary-subtle" style="width:100px; height:55px; object-fit:cover;" alt="Banner Preview">
+                  </td>
+                  <td><h6 class="mb-0 fw-semibold text-color small" style="font-size:0.75rem;">Sukses UTBK SNBT bersama Al Faiz</h6></td>
+                  <td><p class="text-muted mb-0 small" style="font-size:0.75rem; max-width:300px; white-space:normal;">Belajar gratis dengan materi terstruktur standar UTBK SNBT terbaru.</p></td>
+                  <td class="text-end">
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 edit-banner-btn me-2" data-id="1" data-title="Sukses UTBK SNBT bersama Al Faiz" data-subtitle="Belajar gratis dengan materi terstruktur standar UTBK SNBT terbaru." data-img="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&auto=format&fit=crop&q=80">Edit</button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-banner-btn">Hapus</button>
+                  </td>
+                </tr>
+
+                <!-- Banner 2 -->
+                <tr>
+                  <td>
+                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&auto=format&fit=crop&q=80" class="rounded shadow-sm border border-secondary-subtle" style="width:100px; height:55px; object-fit:cover;" alt="Banner Preview">
+                  </td>
+                  <td><h6 class="mb-0 fw-semibold text-color small" style="font-size:0.75rem;">Lolos SKD Sekolah Kedinasan & CPNS</h6></td>
+                  <td><p class="text-muted mb-0 small" style="font-size:0.75rem; max-width:300px; white-space:normal;">Materi TIU, TWK, dan TKP ter-update dibahas secara tuntas.</p></td>
+                  <td class="text-end">
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 edit-banner-btn me-2" data-id="2" data-title="Lolos SKD Sekolah Kedinasan & CPNS" data-subtitle="Materi TIU, TWK, dan TKP ter-update dibahas secara tuntas." data-img="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&auto=format&fit=crop&q=80">Edit</button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-banner-btn">Hapus</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CRUD Modal -->
+  <div class="modal fade" id="bannerModal" tabindex="-1" aria-labelledby="bannerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header border-secondary-subtle">
+          <h5 class="modal-title font-heading h6 text-color" id="bannerModalLabel">Tambah Banner Baru</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="banner-form">
+          <input type="hidden" id="banner-id">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="banner-title" class="form-label small text-muted">Judul Banner (Title)</label>
+              <input type="text" class="form-control form-control-custom" id="banner-title" placeholder="Contoh: Sukses UTBK 2026" required>
+            </div>
+            <div class="mb-3">
+              <label for="banner-subtitle" class="form-label small text-muted">Sub-judul Banner (Subtitle)</label>
+              <input type="text" class="form-control form-control-custom" id="banner-subtitle" placeholder="Contoh: Belajar gratis terstruktur dari nol..." required>
+            </div>
+            <div class="mb-3">
+              <label for="banner-image" class="form-label small text-muted">Gambar Banner URL</label>
+              <input type="text" class="form-control form-control-custom" id="banner-image" placeholder="Masukkan URL Gambar..." required>
+            </div>
+          </div>
+          <div class="modal-footer border-secondary-subtle">
+            <button type="button" class="btn btn-outline-secondary py-2" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-danger py-2 px-4 border-0 bg-primary-custom text-white font-heading">SIMPAN BANNER</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Dependencies -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Edit banner
+      $('.edit-banner-btn').on('click', function() {
+        $('#banner-id').val($(this).attr('data-id'));
+        $('#banner-title').val($(this).attr('data-title'));
+        $('#banner-subtitle').val($(this).attr('data-subtitle'));
+        $('#banner-image').val($(this).attr('data-img'));
+
+        $('#bannerModalLabel').text('Edit Banner (Simulasi)');
+        $('#bannerModal').modal('show');
+      });
+
+      // Delete banner
+      $('.delete-banner-btn').on('click', function() {
+        if (confirm("Apakah Anda yakin ingin menghapus banner ini? (Simulasi)")) {
+          $(this).closest('tr').remove();
+        }
+      });
+
+      // Add reset
+      $('#add-banner-btn').on('click', function() {
+        $('#banner-id').val('');
+        $('#banner-form')[0].reset();
+        $('#bannerModalLabel').text('Tambah Banner Baru (Simulasi)');
+      });
+
+      // Form submit
+      $('#banner-form').on('submit', function(e) {
+        e.preventDefault();
+        alert("Banner berhasil disimpan (Simulasi)!");
+        $('#bannerModal').modal('hide');
+      });
+    });
+  </script>
+</body>
+</html>
