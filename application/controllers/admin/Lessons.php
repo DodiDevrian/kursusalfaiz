@@ -1,6 +1,6 @@
 <?php
 
-class Courses extends CI_Controller
+class Lessons extends CI_Controller
 {
 
     public function __construct(){
@@ -9,6 +9,7 @@ class Courses extends CI_Controller
 		$this->load->helpers(['menuAktif']);
 		$this->load->helpers('text');
         $this->load->model('m_courses');
+        $this->load->model('m_lessons');
 
         // if ($this->session->userdata('role') != 1) {
 		// 	$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -22,9 +23,10 @@ class Courses extends CI_Controller
     {
         $data = array(
             'title' => 'Admin',
-            'title2' => 'Courses',
+            'title2' => 'Lessons',
             'courses' => $this->m_courses->get_all(),
-            'isi'   => 'admin/v_courses'
+            'lessons' => $this->m_lessons->get_all(),
+            'isi'   => 'admin/v_lessons'
         );
         $this->load->view('admin/layout/v_wrapper', $data, FALSE);
     }
@@ -33,19 +35,21 @@ class Courses extends CI_Controller
     {
         // Ambil data dari form
         $id          = $this->input->post('id');
+        $course_id   = $this->input->post('course_id');
         $judul       = $this->input->post('judul');
         $slug        = $this->input->post('slug');
-        $category_id = $this->input->post('category_id');
-        $status      = $this->input->post('status');
-        $thumbnail   = $this->input->post('thumbnail');
+        $video_youtube   = $this->input->post('video_youtube');
+        $pdf   = $this->input->post('pdf');
+        $urutan   = $this->input->post('urutan');
         $deskripsi   = $this->input->post('deskripsi');
 
         $data = [
+            'course_id'   => $course_id,
             'judul'       => $judul,
             'slug'        => $slug,
-            'category_id' => $category_id,
-            'status'      => $status,
-            'thumbnail'   => $thumbnail,
+            'video_youtube' => $video_youtube,
+            'pdf'         => $pdf,
+            'urutan'      => $urutan,
             'deskripsi'   => $deskripsi
         ];
 
@@ -54,29 +58,29 @@ class Courses extends CI_Controller
 
             $data['created_at'] = date('Y-m-d H:i:s');
 
-            $this->db->insert('courses', $data);
+            $this->db->insert('lessons', $data);
 
             // redirect setelah simpan
             $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Ditambahkan!');
-            redirect('admin/courses');
+            redirect('admin/lessons');
 
         }
         // UPDATE
         else {
 
             $this->db->where('id', $id);
-            $this->db->update('courses', $data);
+            $this->db->update('lessons', $data);
 
             $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Diupdate!');
-            redirect('admin/courses');
+            redirect('admin/lessons');
         }
     }
 
     public function hapus($id){
         $this->db->where('id', $id);
-        $this->db->delete('courses');
+        $this->db->delete('lessons');
 
-        $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Dihapus!');
-        redirect('admin/courses');
+        $this->session->set_flashdata('pesan', 'Data Lessons Berhasil Dihapus!');
+        redirect('admin/lessons');
     }
 }

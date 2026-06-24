@@ -14,12 +14,20 @@
             }
         ?>
         <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
-          <div class="mb-3">
+          <div class="mb-3 d-flex flex-wrap gap-2 align-items-center">
             <div class="input-group" style="max-width: 300px;">
               <span class="input-group-text bg-transparent border-end-0 border-secondary-subtle text-muted">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </span>
               <input type="text" class="form-control form-control-custom border-start-0 border-secondary-subtle ps-0 table-search-input" placeholder="Cari kelas...">
+            </div>
+            <div style="min-width: 220px;">
+              <select class="form-select form-control-custom border-secondary-subtle" id="filter-category">
+                <option value="all">Semua Kategori (Filter)</option>
+                <option value="UTBK">UTBK</option>
+                <option value="SKD Kedinasan">SKD Kedinasan</option>
+                <option value="CPNS">CPNS</option>
+              </select>
             </div>
           </div>
           <div class="table-responsive">
@@ -45,10 +53,16 @@
                         <span class="text-muted d-block" style="font-size:0.7rem;">URL: /course-detail?slug=<?= $value->slug ?></span>
                       </td>
                       <td><span class="text-muted small"><?= $value->nama_kategori ?></span></td>
-                      <td><span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small">Aktif</span></td>
+                      <td>
+                        <?php if ($value->status == 'aktif') { ?>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 small"><?= $value->status ?></span>
+                        <?php } else { ?>
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1 small"><?= $value->status ?></span>
+                        <?php } ?>
+                      </td>
                       <td class="text-end">
                         <button class="btn btn-outline-secondary btn-sm rounded-pill px-3 me-2 edit-course-btn" data-bs-toggle="modal" data-bs-target="#courseModalEdit<?= $value->id ?>">Edit</button>
-                        <button class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-course-btn">Hapus</button>
+                        <a href="<?= base_url('admin/courses/hapus/' . $value->id) ?>"><button class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-course-btn">Hapus</button></a>
                       </td>
                     </tr>
                  <?php } ?>
@@ -123,7 +137,7 @@
                 </div>
 
                 <form id="course-form" method="post" action="<?= base_url('admin/courses/simpan') ?>">
-                    <input type="hidden" id="course-id-edit" name="id" value="<?= $value->id ?>">
+                    <input type="hidden" id="course-id-edit<?= $value->id ?>" name="id" value="<?= $value->id ?>">
                     <div class="modal-body">
                         <div class="row g-3">
                         <div class="col-md-6">

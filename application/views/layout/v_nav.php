@@ -7,10 +7,10 @@
             <a class="nav-link fw-medium" href="courses">Daftar Kelas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-medium" href="#about">Tentang Kami</a>
+            <a class="nav-link fw-medium" href="home#about">Tentang Kami</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-medium" href="#faq">FAQ</a>
+            <a class="nav-link fw-medium" href="home#faq">FAQ</a>
           </li>
         </ul>
         

@@ -10,9 +10,9 @@
         
         <div class="py-3">
           <a href="<?= base_url('admin/dashboard') ?>" class="sidebar-link <?php echo menuAktif('dashboard') ?>"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-          <a href="admin-categories.html" class="sidebar-link <?php echo menuAktif('kategori') ?>"><i class="fa-solid fa-folder-tree"></i> Kategori</a>
+          <a href="<?= base_url('admin/categories') ?>" class="sidebar-link <?php echo menuAktif('categories') ?>"><i class="fa-solid fa-folder-tree"></i> Kategori</a>
           <a href="<?= base_url('admin/courses') ?>" class="sidebar-link <?php echo menuAktif('courses') ?>"><i class="fa-solid fa-graduation-cap"></i> Course / Kelas</a>
-          <a href="admin-lessons.html" class="sidebar-link <?php echo menuAktif('pelajaran') ?>"><i class="fa-solid fa-book"></i> Materi Pelajaran</a>
+          <a href="<?= base_url('admin/lessons') ?>" class="sidebar-link <?php echo menuAktif('lessons') ?>"><i class="fa-solid fa-book"></i> Materi Pelajaran</a>
           <a href="admin-users.html" class="sidebar-link <?php echo menuAktif('user') ?>"><i class="fa-solid fa-users"></i> Pelajar / User</a>
           <a href="admin-comments.html" class="sidebar-link <?php echo menuAktif('komentar') ?>"><i class="fa-solid fa-comments"></i> Komentar</a>
           <a href="admin-faq.html" class="sidebar-link <?php echo menuAktif('faq') ?>"><i class="fa-solid fa-circle-question"></i> FAQ Website</a>
