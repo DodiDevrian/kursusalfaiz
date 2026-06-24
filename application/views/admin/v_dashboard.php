@@ -52,7 +52,7 @@
         <div class="row g-4">
           <!-- Recent Users Table -->
           <div class="col-lg-6">
-            <h3 class="font-heading h5 mb-3">Siswa Baru Terdaftar</h3>
+            <h3 class="font-heading h5 mb-3">User Baru Terdaftar</h3>
             <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
               <div class="mb-3">
                 <div class="input-group" style="max-width: 250px;">
@@ -66,7 +66,7 @@
                 <table class="table table-custom align-middle mb-0">
                   <thead>
                     <tr>
-                      <th class="font-heading small py-2">Siswa</th>
+                      <th class="font-heading small py-2">User</th>
                       <th class="font-heading small py-2">Email</th>
                       <th class="font-heading small py-2">Status</th>
                     </tr>

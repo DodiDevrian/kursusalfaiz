@@ -104,6 +104,13 @@ abstract class CI_DB_driver {
 	public $subdriver;
 
 	/**
+	 * Failover connections
+	 *
+	 * @var	array
+	 */
+	public $failover = array();
+
+	/**
 	 * Table prefix
 	 *
 	 * @var	string
