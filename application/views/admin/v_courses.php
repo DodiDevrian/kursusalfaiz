@@ -70,8 +70,49 @@
               </tbody>
             </table>
           </div>
+          <!-- Pagination Wrapper -->
+          <div id="courses-pagination-wrapper" class="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2 d-none">
+            <div class="text-muted small" id="courses-page-info">
+            </div>
+            <nav aria-label="Courses page navigation">
+              <ul class="pagination pagination-custom gap-1 mb-0" id="courses-pagination">
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
+
+  <style>
+    .pagination-custom .page-link {
+      color: var(--text-color);
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 50px !important;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+    .pagination-custom .page-link:hover {
+      background-color: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .pagination-custom .page-item.active .page-link {
+      background-color: var(--primary) !important;
+      color: white !important;
+      border-color: var(--primary) !important;
+    }
+    .pagination-custom .page-item.disabled .page-link {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
 
     <div class="modal fade" id="courseModalTambah" tabindex="-1" aria-labelledby="courseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
