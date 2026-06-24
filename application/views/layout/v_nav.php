@@ -1,10 +1,10 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
           <li class="nav-item">
-            <a class="nav-link active fw-medium" href="index.html">Home</a>
+            <a class="nav-link active fw-medium" href="home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link fw-medium" href="courses.html">Daftar Kelas</a>
+            <a class="nav-link fw-medium" href="courses">Daftar Kelas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link fw-medium" href="#about">Tentang Kami</a>

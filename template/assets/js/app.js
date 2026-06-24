@@ -21,6 +21,59 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "index.html";
     });
   });
+
+  // Live filter search for tables
+  const tableSearchInputs = document.querySelectorAll(".table-search-input");
+  tableSearchInputs.forEach(input => {
+    input.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+      const card = this.closest(".bg-white") || this.closest(".card");
+      if (!card) return;
+      const table = card.querySelector("table");
+      if (!table) return;
+      const tbody = table.querySelector("tbody");
+      if (!tbody) return;
+      
+      const rows = tbody.querySelectorAll("tr:not(.no-results-row)");
+      let visibleCount = 0;
+      
+      rows.forEach(row => {
+        // Exclude cells that contain buttons or actions from search match to prevent false positives
+        const searchableCells = Array.from(row.cells).filter(cell => !cell.classList.contains("text-end") && !cell.querySelector("button"));
+        const text = searchableCells.map(cell => cell.textContent).join(" ").toLowerCase();
+        
+        if (text.includes(query)) {
+          row.style.setProperty('display', '', 'important');
+          visibleCount++;
+        } else {
+          row.style.setProperty('display', 'none', 'important');
+        }
+      });
+      
+      // Handle "No results found" row
+      let noResultsRow = tbody.querySelector(".no-results-row");
+      if (visibleCount === 0) {
+        if (!noResultsRow) {
+          const colSpan = table.querySelectorAll("thead th").length || 5;
+          noResultsRow = document.createElement("tr");
+          noResultsRow.className = "no-results-row";
+          noResultsRow.innerHTML = `
+            <td colspan="${colSpan}" class="text-center py-4 text-muted small">
+              <i class="fa-solid fa-face-frown me-1 fs-5 d-block mb-2 text-gold"></i>
+              Tidak ada data yang cocok dengan pencarian.
+            </td>
+          `;
+          tbody.appendChild(noResultsRow);
+        } else {
+          noResultsRow.style.setProperty('display', '', 'important');
+        }
+      } else {
+        if (noResultsRow) {
+          noResultsRow.style.setProperty('display', 'none', 'important');
+        }
+      }
+    });
+  });
 });
 
 function initTheme() {

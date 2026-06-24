@@ -1,59 +1,4 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard - AL Faiz</title>
-  <!-- Google Fonts & Bootstrap 5 & FontAwesome -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-
-  <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
-    <div class="container-fluid px-lg-5">
-      <a class="navbar-brand font-heading text-primary-custom" href="index.html" style="font-weight: 800; font-size: 1.5rem; letter-spacing: 2px;">
-        AL <span class="text-gold">FAIZ</span> <span class="badge bg-danger ms-2 fs-6" style="vertical-align:middle;">ADMIN</span>
-      </a>
-      <div class="d-flex align-items-center gap-3 ms-auto">
-        <a href="#" class="theme-toggle-btn text-dark-emphasis p-2" title="Ganti Mode">
-          <i class="theme-toggle-icon fa-solid fa-moon fs-5"></i>
-        </a>
-        <a href="index.html" class="btn btn-outline-danger btn-sm px-3 rounded-pill">Lihat Website</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Main Container -->
-  <div class="container-fluid px-0">
-    <div class="row g-0">
-      <!-- Admin Sidebar (Left) -->
-      <div class="col-lg-3 col-md-4 sidebar-layout px-0">
-        <div class="text-center py-4 border-bottom border-secondary-subtle">
-          <img id="admin-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60" alt="Avatar" class="rounded-circle mb-2 border border-3 border-danger" style="width: 80px; height: 80px; object-fit: cover;">
-          <h5 class="mb-1 font-heading text-color h6" id="admin-name">Al Faiz Admin</h5>
-          <span class="badge bg-danger text-white small">Super Admin</span>
-        </div>
-        
-        <div class="py-3">
-          <a href="admin-dashboard.html" class="sidebar-link active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
-          <a href="admin-categories.html" class="sidebar-link"><i class="fa-solid fa-folder-tree"></i> Kategori</a>
-          <a href="admin-courses.html" class="sidebar-link"><i class="fa-solid fa-graduation-cap"></i> Course / Kelas</a>
-          <a href="admin-lessons.html" class="sidebar-link"><i class="fa-solid fa-book"></i> Materi Pelajaran</a>
-          <a href="admin-users.html" class="sidebar-link"><i class="fa-solid fa-users"></i> Pelajar / User</a>
-          <a href="admin-comments.html" class="sidebar-link"><i class="fa-solid fa-comments"></i> Komentar</a>
-          <a href="admin-faq.html" class="sidebar-link"><i class="fa-solid fa-circle-question"></i> FAQ Website</a>
-          <a href="admin-banner.html" class="sidebar-link"><i class="fa-solid fa-images"></i> Banner / Slider</a>
-          <a href="admin-settings.html" class="sidebar-link"><i class="fa-solid fa-gears"></i> Pengaturan Web</a>
-          <hr class="border-secondary-subtle my-2">
-          <a href="#" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
-        </div>
-      </div>
-
-      <!-- Content (Right) -->
-      <div class="col-lg-9 col-md-8 p-4 p-lg-5">
+<div class="col-lg-9 col-md-8 p-4 p-lg-5">
         <div class="mb-4">
           <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">KENDALI UTAMA</span>
           <h1 class="font-heading h3 text-color">Dashboard Admin</h1>
@@ -195,12 +140,3 @@
         </div>
 
       </div>
-    </div>
-  </div>
-
-  <!-- JS Dependencies -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/app.js"></script>
-</body>
-</html>
