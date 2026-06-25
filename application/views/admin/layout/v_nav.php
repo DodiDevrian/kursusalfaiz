@@ -18,6 +18,6 @@
           <a href="admin-faq.html" class="sidebar-link <?php echo menuAktif('faq') ?>"><i class="fa-solid fa-circle-question"></i> FAQ Website</a>
           <a href="admin-settings.html" class="sidebar-link <?php echo menuAktif('pengaturan') ?>"><i class="fa-solid fa-gears"></i> Pengaturan Web</a>
           <hr class="border-secondary-subtle my-2">
-          <a href="#" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+          <a href="<?=base_url('auth/logout') ?>" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
         </div>
       </div>

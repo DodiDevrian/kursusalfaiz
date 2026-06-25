@@ -1,0 +1,27 @@
+<?php
+
+class M_user extends CI_Model{
+
+    public function get_all()
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->order_by('id_user', 'desc');
+        return $this->db->get()->result();
+    }
+
+    public function get_user($id)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('id_user', $id);
+        return $this->db->get()->row();
+    }
+
+    public function update_user($id, $data)
+    {
+        $this->db->where('id_user', $id);
+        $this->db->update('users', $data);
+    }
+
+}
