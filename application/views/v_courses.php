@@ -43,12 +43,34 @@
               <p class="text-muted small flex-grow-1"><?= $course->deskripsi; ?></p>
               <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
                 <span class="text-gold fw-bold">Gratis</span>
-                <a href="<?= base_url('course_detail'); ?>?slug=<?= $course->slug; ?>" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
+                <?php if ($this->session->userdata('nama')) { ?>
+                  <a href="<?= base_url('course_detail'); ?>?slug=<?= $course->slug; ?>" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
+                <?php } else { ?>
+                  <a href="#" class="btn btn-primary-custom btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Detail</a>
+                <?php } ?>
               </div>
             </div>
           </div>
         </div>
         <?php } ?>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Login Terlebih Dahulu!</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Silahkan masuk terlebih dahulu untuk melihat detail kelas
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Tutup</button>
+              <a href="<?php echo base_url('auth/login') ?>" class="btn btn-primary-custom btn-sm px-3">Masuk</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Pagination Controls -->

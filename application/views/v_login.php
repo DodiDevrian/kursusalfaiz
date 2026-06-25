@@ -17,7 +17,14 @@
       <h2 class="font-heading text-primary-custom mb-1" style="font-weight: 800; letter-spacing: 2px;">AL FAIZ</h2>
       <p class="text-muted small">Platform Pembelajaran Online Gratis UTBK, SKD, & CPNS</p>
     </div>
-
+    <?php
+      if ($this->session->flashdata('pesan')) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+          echo $this->session->flashdata('pesan');
+          echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>';
+          echo '</div>';
+      }
+    ?>
     <form id="login-form" action="<?= base_url() ?>auth/login" method="POST">
       <div class="mb-3">
         <label for="email" class="form-label font-heading text-muted small" style="font-weight: 600;">ALAMAT EMAIL</label>

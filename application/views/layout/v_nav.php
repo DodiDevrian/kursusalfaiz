@@ -4,7 +4,7 @@
             <a class="nav-link <?php echo menuAktif('home') ?> fw-medium" href="home">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link <?php echo menuAktif('courses') ?> fw-medium" href="courses">Daftar Kelas</a>
+            <a class="nav-link <?php echo menuAktif('courses'); if($this->uri->segment(1) == 'course_detail') { echo 'active'; } ?> fw-medium" href="courses">Daftar Kelas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?php echo menuAktif('about') ?> fw-medium" href="home#about">Tentang Kami</a>
@@ -38,7 +38,7 @@
           <?php } else { ?>
             <!-- Guest View -->
             <div id="guest-nav-items" class="d-flex gap-2">
-              <a href="register.html" class="btn btn-outline-primary-custom px-4 py-2 border-0">Daftar</a>
+              <a href="<?php echo base_url('register') ?>" class="btn btn-outline-primary-custom px-4 py-2 border-0">Daftar</a>
               <a href="<?php echo base_url('auth/login') ?>" class="btn btn-primary-custom px-4 py-2 border-0">Masuk</a>
             </div>
           <?php } ?>

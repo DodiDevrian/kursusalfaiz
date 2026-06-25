@@ -10,6 +10,11 @@ class Lesson extends CI_Controller
         $this->load->model('m_categories');
         $this->load->model('m_courses');
         $this->load->model('m_lessons');
+
+        if ($this->session->userdata('role')!='user') {
+			$this->session->set_flashdata('pesan', 'Anda Belum Melakukan Login, Silahkan Login Terlebih Dahulu!');
+			redirect('auth/login');
+		}
 	}
     
     public function index()

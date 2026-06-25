@@ -15,18 +15,18 @@
         <div class="col-lg-2 col-md-4 col-6">
           <h5>Program Belajar</h5>
           <ul class="list-unstyled">
-            <li class="mb-2"><a href="courses.html?category=utbk">UTBK SNBT</a></li>
-            <li class="mb-2"><a href="courses.html?category=skd">SKD Kedinasan</a></li>
-            <li class="mb-2"><a href="courses.html?category=cpns">CPNS 2026</a></li>
+            <li class="mb-2"><a href="courses?category=utbk">UTBK SNBT</a></li>
+            <li class="mb-2"><a href="courses?category=skd">SKD Kedinasan</a></li>
+            <li class="mb-2"><a href="courses?category=cpns">CPNS 2026</a></li>
           </ul>
         </div>
         <div class="col-lg-2 col-md-4 col-6">
           <h5>Halaman Utama</h5>
           <ul class="list-unstyled">
-            <li class="mb-2"><a href="courses.html">Semua Kelas</a></li>
-            <li class="mb-2"><a href="#about">Tentang Kami</a></li>
-            <li class="mb-2"><a href="#faq">FAQ Tanya Jawab</a></li>
-            <li class="mb-2"><a href="admin-login.html">Login Admin</a></li>
+            <li class="mb-2"><a href="courses">Semua Kelas</a></li>
+            <li class="mb-2"><a href="home#about">Tentang Kami</a></li>
+            <li class="mb-2"><a href="home#faq">FAQ Tanya Jawab</a></li>
+            <li class="mb-2"><a href="auth/login">Login Admin</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-4">

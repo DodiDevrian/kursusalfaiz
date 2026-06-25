@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Akun - AL Faiz</title>
+  <link href="<?= base_url()?>assets/img/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
   <!-- Google Fonts & Bootstrap 5 & FontAwesome -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,12 +18,12 @@
       <p class="text-muted small">Mulai Belajar Gratis UTBK, SKD, & CPNS</p>
     </div>
 
-    <form id="register-form" action="login.html">
+    <form id="register-form" action="<?= base_url() ?>register" method="post">
       <div class="mb-3">
         <label for="nama" class="form-label font-heading text-muted small" style="font-weight: 600;">NAMA LENGKAP</label>
         <div class="input-group">
           <span class="input-group-text bg-transparent border-end-0 border-color"><i class="fa-solid fa-user text-muted"></i></span>
-          <input type="text" class="form-control form-control-custom border-start-0 ps-0" id="nama" placeholder="Nama Lengkap Anda" required>
+          <input type="text" class="form-control form-control-custom border-start-0 ps-0" id="nama" name="nama" placeholder="Nama Lengkap Anda" required>
         </div>
       </div>
 
@@ -30,7 +31,7 @@
         <label for="email" class="form-label font-heading text-muted small" style="font-weight: 600;">ALAMAT EMAIL</label>
         <div class="input-group">
           <span class="input-group-text bg-transparent border-end-0 border-color"><i class="fa-solid fa-envelope text-muted"></i></span>
-          <input type="email" class="form-control form-control-custom border-start-0 ps-0" id="email" placeholder="nama@email.com" required>
+          <input type="email" class="form-control form-control-custom border-start-0 ps-0" id="email" name="email" placeholder="nama@email.com" required>
         </div>
       </div>
 
@@ -38,7 +39,7 @@
         <label for="password" class="form-label font-heading text-muted small" style="font-weight: 600;">KATA SANDI</label>
         <div class="input-group">
           <span class="input-group-text bg-transparent border-end-0 border-color"><i class="fa-solid fa-lock text-muted"></i></span>
-          <input type="password" class="form-control form-control-custom border-start-0 ps-0" id="password" placeholder="Min. 6 karakter" required minlength="6">
+          <input type="password" class="form-control form-control-custom border-start-0 ps-0" id="password" name="password" placeholder="Min. 6 karakter" required minlength="6">
         </div>
       </div>
 
@@ -46,7 +47,7 @@
         <label for="confirm-password" class="form-label font-heading text-muted small" style="font-weight: 600;">KONFIRMASI KATA SANDI</label>
         <div class="input-group">
           <span class="input-group-text bg-transparent border-end-0 border-color"><i class="fa-solid fa-shield text-muted"></i></span>
-          <input type="password" class="form-control form-control-custom border-start-0 ps-0" id="confirm-password" placeholder="Ulangi kata sandi" required minlength="6">
+          <input type="password" class="form-control form-control-custom border-start-0 ps-0" id="confirm-password" name="confirm-password" placeholder="Ulangi kata sandi" required minlength="6">
         </div>
       </div>
 

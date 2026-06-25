@@ -16,7 +16,6 @@
           <a href="admin-users.html" class="sidebar-link <?php echo menuAktif('user') ?>"><i class="fa-solid fa-users"></i> Pelajar / User</a>
           <a href="admin-comments.html" class="sidebar-link <?php echo menuAktif('komentar') ?>"><i class="fa-solid fa-comments"></i> Komentar</a>
           <a href="admin-faq.html" class="sidebar-link <?php echo menuAktif('faq') ?>"><i class="fa-solid fa-circle-question"></i> FAQ Website</a>
-          <a href="admin-banner.html" class="sidebar-link <?php echo menuAktif('banner') ?>"><i class="fa-solid fa-images"></i> Banner / Slider</a>
           <a href="admin-settings.html" class="sidebar-link <?php echo menuAktif('pengaturan') ?>"><i class="fa-solid fa-gears"></i> Pengaturan Web</a>
           <hr class="border-secondary-subtle my-2">
           <a href="#" class="sidebar-link text-danger logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>

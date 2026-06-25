@@ -6,15 +6,10 @@ class Dashboard extends CI_Controller
     public function __construct(){
 		parent ::__construct();
 
-		// $this->load->helpers(['menuAktif']);
-		// $this->load->helpers('text');
-
-        // if ($this->session->userdata('role') != 1) {
-		// 	$this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		// 		Anda Belum Melakukan <strong>Login Sebagai Admin!</strong>
-		// 		</div>');
-		// 	redirect('auth/login_admin');
-		// }
+		if ($this->session->userdata('role')!='admin') {
+			$this->session->set_flashdata('pesan', 'Halaman ini hanya dapat diakses oleh admin, silahkan lakukan login admin!');
+			redirect('auth/login');
+		}
 	}
 
     public function index()

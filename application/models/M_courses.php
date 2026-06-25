@@ -5,13 +5,11 @@ class M_courses extends CI_Model
 {
     private $table = 'courses';
 
-    // INSERT data baru
     public function insert($data)
     {
         return $this->db->insert($this->table, $data);
     }
 
-    // UPDATE data
     public function update($id, $data)
     {
         return $this->db
@@ -19,7 +17,6 @@ class M_courses extends CI_Model
             ->update($this->table, $data);
     }
 
-    // GET semua data course
     public function get_all()
     {
         return $this->db
@@ -31,7 +28,28 @@ class M_courses extends CI_Model
             ->result();
     }
 
-    // GET data by ID
+    public function get_3(){
+        return $this->db
+            ->select('courses.*, categories.nama_kategori')
+            ->from('courses')
+            ->join('categories', 'categories.id = courses.category_id')
+            ->order_by('courses.id', 'DESC')
+            ->limit(3)
+            ->get()
+            ->result();
+    }
+
+    // public function get_3_popular(){
+    //     return $this->db
+    //         ->select('courses.*, categories.nama_kategori')
+    //         ->from('courses')
+    //         ->join('categories', 'categories.id = courses.category_id')
+    //         ->order_by('courses.id', 'DESC')
+    //         ->limit(3)
+    //         ->get()
+    //         ->result();
+    // }
+
     public function get_by_id($id)
     {
         return $this->db
@@ -39,7 +57,6 @@ class M_courses extends CI_Model
             ->row();
     }
 
-    // DELETE data
     public function delete($id)
     {
         return $this->db
@@ -47,7 +64,6 @@ class M_courses extends CI_Model
             ->delete($this->table);
     }
 
-    // CEK slug unik (opsional tapi sangat disarankan)
     public function is_slug_exist($slug, $id = null)
     {
         $this->db->where('slug', $slug);

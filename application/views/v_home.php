@@ -7,12 +7,12 @@
           <h1 class="font-heading mb-3">Jangkau Impianmu Bersama Al Faiz</h1>
           <p class="lead mb-4 text-white-50" style="font-weight: 300;">Persiapan matang menghadapi UTBK-SNBT, Seleksi Kompetensi Dasar (SKD) Sekolah Kedinasan, dan Seleksi CPNS dengan materi terstruktur gratis terbaik.</p>
           <div class="d-flex flex-column flex-sm-row gap-3">
-            <a href="courses.html" class="btn btn-gold-custom px-5 py-3 font-heading text-white border-0 bg-gold-custom" style="font-weight: 600; letter-spacing: 1px;">MULAI BELAJAR</a>
-            <a href="courses.html" class="btn btn-outline-light px-5 py-3 font-heading border-2" style="font-weight: 600; letter-spacing: 1px;">LIHAT KELAS</a>
+            <a href="auth/login" class="btn btn-gold-custom px-5 py-3 font-heading text-white border-0 bg-gold-custom" style="font-weight: 600; letter-spacing: 1px;">MULAI BELAJAR</a>
+            <a href="courses" class="btn btn-outline-light px-5 py-3 font-heading border-2" style="font-weight: 600; letter-spacing: 1px;">LIHAT KELAS</a>
           </div>
         </div>
         <div class="col-lg-6 text-center text-lg-end">
-          <img src="https://privatalfaiz.id/assets/img/hero.png" alt="Al Faiz Belajar" class="img-fluid rounded-4 shadow-lg border border-3 border-light border-opacity-10" style="max-height: 450px; width: 100%; object-fit: cover;">
+          <img src="<?= base_url('assets/img/hero.png') ?>" alt="Al Faiz Belajar" class="img-fluid" style="max-height: 450px; width: 100%; object-fit: cover;">
         </div>
       </div>
     </div>
@@ -23,21 +23,21 @@
     <div class="container">
       <div class="row g-4 justify-content-center">
         <div class="col-md-4 col-sm-6">
-          <div class="category-box" onclick="window.location.href='courses.html?category=utbk'">
+          <div class="category-box" onclick="window.location.href='courses?category=utbk'">
             <div class="icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
             <h4 class="font-heading h5 mb-2">UTBK-SNBT</h4>
             <p class="text-muted small mb-0">Materi Penalaran Umum, Kuantitatif, Matematika, dan Literasi.</p>
           </div>
         </div>
         <div class="col-md-4 col-sm-6">
-          <div class="category-box" onclick="window.location.href='courses.html?category=skd'">
+          <div class="category-box" onclick="window.location.href='courses?category=skd'">
             <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
             <h4 class="font-heading h5 mb-2">SKD KEDINASAN</h4>
             <p class="text-muted small mb-0">Pelatihan TWK, TIU, TKP khusus seleksi sekolah kedinasan.</p>
           </div>
         </div>
         <div class="col-md-4 col-sm-6">
-          <div class="category-box" onclick="window.location.href='courses.html?category=cpns'">
+          <div class="category-box" onclick="window.location.href='courses?category=cpns'">
             <div class="icon-box"><i class="fa-solid fa-user-tie"></i></div>
             <h4 class="font-heading h5 mb-2">CPNS 2026</h4>
             <p class="text-muted small mb-0">Kunci lolos passing grade SKD CPNS dengan FR ter-update.</p>
@@ -55,60 +55,31 @@
           <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">KELAS BARU</span>
           <h2 class="font-heading h3 mb-0">Materi Pembelajaran Terbaru</h2>
         </div>
-        <a href="courses.html" class="text-primary-custom fw-semibold text-decoration-none small">Lihat Semua <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        <a href="courses" class="text-primary-custom fw-semibold text-decoration-none small">Lihat Semua <i class="fa-solid fa-arrow-right ms-1"></i></a>
       </div>
       <div class="row g-4" id="latest-courses-list">
-        <!-- Card 1 -->
+        <?php foreach ($get3 as $course) { ?>
         <div class="col-lg-4 col-md-6">
           <div class="course-card">
             <div class="card-img-wrapper">
-              <span class="badge-category">UTBK</span>
-              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&auto=format&fit=crop&q=60" alt="Penalaran Umum">
+              <span class="badge-category"><?= $course->nama_kategori ?></span>
+              <img src="<?= $course->thumbnail ?>" alt="Penalaran Umum">
             </div>
             <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Penalaran Umum UTBK</h4>
-              <p class="text-muted small flex-grow-1">Materi dan strategi menjawab soal Penalaran Umum UTBK SNBT secara cepat dan tepat.</p>
+              <h4 class="font-heading h5 mb-2"><?= $course->judul ?></h4>
+              <p class="text-muted small flex-grow-1"><?= $course->deskripsi ?></p>
               <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
                 <span class="text-gold fw-bold">Gratis</span>
-                <a href="course-detail.html?slug=penalaran-umum" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
+                <?php if ($this->session->userdata('nama')) { ?>
+                  <a href="<?= base_url('course_detail'); ?>?slug=<?= $course->slug; ?>" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
+                <?php } else { ?>
+                  <a href="#" class="btn btn-primary-custom btn-sm px-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Lihat Detail</a>
+                <?php } ?>
               </div>
             </div>
           </div>
         </div>
-        <!-- Card 2 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="course-card">
-            <div class="card-img-wrapper">
-              <span class="badge-category">UTBK</span>
-              <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?w=600&auto=format&fit=crop&q=60" alt="Pengetahuan Kuantitatif">
-            </div>
-            <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Pengetahuan Kuantitatif</h4>
-              <p class="text-muted small flex-grow-1">Kumpulan konsep matematika dasar, logika aritmatika, dan pemecahan masalah kuantitatif.</p>
-              <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
-                <span class="text-gold fw-bold">Gratis</span>
-                <a href="course-detail.html?slug=pengetahuan-kuantitatif" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="course-card">
-            <div class="card-img-wrapper">
-              <span class="badge-category">SKD KEDINASAN</span>
-              <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?w=600&auto=format&fit=crop&q=60" alt="TWK SKD">
-            </div>
-            <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Tes Wawasan Kebangsaan (TWK) SKD</h4>
-              <p class="text-muted small flex-grow-1">Penguasaan materi Pancasila, UUD 1945, Bhinneka Tunggal Ika, dan NKRI.</p>
-              <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
-                <span class="text-gold fw-bold">Gratis</span>
-                <a href="course-detail.html?slug=twk-skd" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php } ?>
       </div>
     </div>
   </section>
@@ -121,7 +92,7 @@
           <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">POPULER</span>
           <h2 class="font-heading h3 mb-0">Kelas Paling Banyak Dipelajari</h2>
         </div>
-        <a href="courses.html" class="text-primary-custom fw-semibold text-decoration-none small">Lihat Semua <i class="fa-solid fa-arrow-right ms-1"></i></a>
+        <a href="courses" class="text-primary-custom fw-semibold text-decoration-none small">Lihat Semua <i class="fa-solid fa-arrow-right ms-1"></i></a>
       </div>
       <div class="row g-4" id="popular-courses-list">
         <!-- Card 1 -->
@@ -298,8 +269,8 @@
   <!-- 9. CTA Section -->
   <section class="py-5 text-center text-white" style="background: linear-gradient(rgba(122, 12, 12, 0.9), rgba(74, 0, 0, 0.95)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&auto=format&fit=crop&q=80') no-repeat center center; background-size: cover; background-attachment: fixed;">
     <div class="container py-4">
-      <h2 class="font-heading mb-3">Siap Menghadapi Seleksi UTBK, SKD, & CPNS?</h2>
+      <h2 class="font-heading mb-3" style="color: aliceblue;">Siap Menghadapi Seleksi UTBK, SKD, & CPNS?</h2>
       <p class="lead text-white-50 max-width-600 mx-auto mb-4" style="max-width: 600px;">Daftarkan dirimu secara gratis sekarang dan mulai belajar dari mentor terbaik di Indonesia.</p>
-      <a href="register.html" class="btn btn-gold-custom px-5 py-3 font-heading text-white border-0 bg-gold-custom" style="font-weight: 600; letter-spacing: 1px;">DAFTAR SEKARANG - 100% GRATIS</a>
+      <a href="register" class="btn btn-gold-custom px-5 py-3 font-heading text-white border-0 bg-gold-custom" style="font-weight: 600; letter-spacing: 1px;">DAFTAR SEKARANG - 100% GRATIS</a>
     </div>
   </section>
