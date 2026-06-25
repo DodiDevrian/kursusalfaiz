@@ -14,6 +14,14 @@
             $totalMateri++;
         }
     }
+    $status ='';
+    foreach ($cek_course as $key => $value) {
+      if($value->course_id == $id_course){
+        if($value->progress == 100){
+            $status = 'Selesai';
+        }
+      }
+    }
   ?>
   <section class="py-5 text-white mt-5" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark-red) 100%);">
     <div class="container py-4 mt-3">
@@ -56,19 +64,26 @@
 
             <!-- Lessons list -->
             <div class="list-group list-group-flush" id="syllabus-list">
-              <!-- Lesson 1 -->
                <?php foreach ($lessons as $key => $value) { ?>
                 <?php if($value->course_id == $id_course){ ?>
-                <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-secondary-subtle" style="background-color: transparent;">
-                    <div class="d-flex align-items-center">
-                    <i class="fa-solid fa-circle-play text-primary-custom me-3"></i>
-                    <div>
-                        <h5 class="mb-0 fs-6 fw-medium text-color"><?= $value->urutan ?>. <?= $value->judul ?></h5>
+                 <div class="list-group-item d-flex justify-content-between align-items-center py-3 border-secondary-subtle" style="background-color: transparent;">
+                     <div class="d-flex align-items-center">
+                     <?php if (isset($value->progress_status) && $value->progress_status == 'selesai') { ?>
+                       <i class="fa-solid fa-circle-check text-success me-3" title="Selesai"></i>
+                     <?php } else { ?>
+                       <i class="fa-solid fa-circle-play text-primary-custom me-3"></i>
+                     <?php } ?>
+                     <div>
+                         <h5 class="mb-0 fs-6 fw-medium text-color"><?= $value->urutan ?>. <?= $value->judul ?></h5>
                         <span class="text-muted small" style="font-size:0.75rem;"><i class="fa-solid fa-video me-1"></i> Video Pembelajaran + PDF</span>
                     </div>
                     </div>
                     <div>
-                    <a href="<?= base_url('lesson?slug='.$value->slug) ?>" class="btn btn-primary-custom btn-sm px-3 rounded-pill">Buka</a>
+                    <?php if (isset($value->progress_status) && $value->progress_status == 'selesai') { ?>
+                        <a href="<?= base_url('lesson?slug='.$value->slug) ?>" class="btn btn-success btn-sm px-3 rounded-pill">Ulangi</a>
+                    <?php } else { ?>
+                        <a href="<?= base_url('lesson?slug='.$value->slug) ?>" class="btn btn-primary-custom btn-sm px-3 rounded-pill">Buka</a>
+                    <?php } ?>
                     </div>
                 </div>
                 <?php if ($value->urutan == 1) {
@@ -113,9 +128,15 @@
 
               <!-- CTA Actions -->
               <div id="sidebar-actions">
-                <a href="<?= base_url('lesson?slug='.$mulaiBelajar) ?>" class="btn btn-primary-custom w-100 py-3 font-heading border-0 bg-primary-custom text-white" style="letter-spacing:1px;">
-                  MULAI BELAJAR
-                </a>
+                <?php if($status == 'Selesai'){ ?>
+                  <a href="<?= base_url('lesson?slug='.$mulaiBelajar) ?>" class="btn btn-success w-100 py-3 font-heading border-0 text-white" style="letter-spacing:1px;">
+                    ULANGI BELAJAR
+                  </a>
+                <?php }else{ ?>
+                  <a href="<?= base_url('lesson?slug='.$mulaiBelajar) ?>" class="btn btn-primary-custom w-100 py-3 font-heading border-0 text-white" style="letter-spacing:1px;">
+                    MULAI BELAJAR
+                  </a>
+                <?php } ?>
               </div>
             </div>
           </div>

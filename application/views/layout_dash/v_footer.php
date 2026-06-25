@@ -7,9 +7,10 @@
   <script src="<?= base_url('template/assets/js/app.js') ?>"></script>
   <script>
     $(document).ready(function() {
-      // Form password submit simulation
+      // Form password submit
       $('#password-form').on('submit', function(e) {
         e.preventDefault();
+        const oldPass = $('#old-pass').val();
         const newPass = $('#new-pass').val();
         const confirmPass = $('#confirm-new-pass').val();
 
@@ -18,8 +19,27 @@
           return;
         }
 
-        $('#password-alert').removeClass('d-none alert-danger').addClass('alert-success').text("Kata sandi berhasil diperbarui (Simulasi)!");
-        $('#password-form')[0].reset();
+        $.ajax({
+          url: '<?= base_url("profile/change_password") ?>',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            old_password: oldPass,
+            new_password: newPass,
+            confirm_new_password: confirmPass
+          },
+          success: function(response) {
+            if (response.status === 'success') {
+              $('#password-alert').removeClass('d-none alert-danger').addClass('alert-success').text(response.message);
+              $('#password-form')[0].reset();
+            } else {
+              $('#password-alert').removeClass('d-none alert-success').addClass('alert-danger').text(response.message);
+            }
+          },
+          error: function() {
+            $('#password-alert').removeClass('d-none alert-success').addClass('alert-danger').text("Terjadi kesalahan sistem. Silakan coba lagi.");
+          }
+        });
       });
     });
   </script>

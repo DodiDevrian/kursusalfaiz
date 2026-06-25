@@ -10,6 +10,7 @@ class Lesson extends CI_Controller
         $this->load->model('m_categories');
         $this->load->model('m_courses');
         $this->load->model('m_lessons');
+        $this->load->model('m_user');
 
         if ($this->session->userdata('role')!='user') {
 			$this->session->set_flashdata('pesan', 'Anda Belum Melakukan Login, Silahkan Login Terlebih Dahulu!');
@@ -34,7 +35,23 @@ class Lesson extends CI_Controller
             show_404();
         }
 
-        $user_id = 2; // Default to Budi Pratama for mock session
+        $user_id = $this->session->userdata('id_user');
+
+        // Check if course progress record exists
+        $course_prog_record = $this->db->get_where('course_progress', [
+            'user_id' => $user_id,
+            'course_id' => $current_lesson->course_id
+        ])->row();
+
+        if (!$course_prog_record) {
+            $this->db->insert('course_progress', [
+                'user_id' => $user_id,
+                'course_id' => $current_lesson->course_id,
+                'progress' => 0,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
 
         // Check if bookmarked
         $is_bookmarked = $this->db->get_where('bookmarks', [
@@ -83,6 +100,7 @@ class Lesson extends CI_Controller
             'current_lesson' => $current_lesson,
             'is_bookmarked' => $is_bookmarked,
             'is_completed' => $is_completed,
+            'profile' => $this->m_user->get_all(),
             'completed_ids' => $completed_ids,
             'progress_percent' => $progress_percent
         );
@@ -92,7 +110,7 @@ class Lesson extends CI_Controller
     public function toggle_bookmark()
     {
         $lesson_id = $this->input->post('lesson_id');
-        $user_id = 2; // Default to Budi Pratama
+        $user_id = $this->session->userdata('id_user');
 
         $bookmark = $this->db->get_where('bookmarks', [
             'user_id' => $user_id,
@@ -120,7 +138,7 @@ class Lesson extends CI_Controller
     {
         $lesson_id = $this->input->post('lesson_id');
         $course_id = $this->input->post('course_id');
-        $user_id = 2; // Default to Budi Pratama
+        $user_id = $this->session->userdata('id_user');
 
         $progress = $this->db->get_where('lesson_progress', [
             'user_id' => $user_id,

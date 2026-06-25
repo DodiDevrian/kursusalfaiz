@@ -50,6 +50,18 @@ class M_courses extends CI_Model
     //         ->result();
     // }
 
+    public function cek_course()
+    {
+        return $this->db
+            ->select('course_progress.*, courses.judul')
+            ->from('course_progress')
+            ->join('courses', 'courses.id = course_progress.course_id')
+            ->order_by('course_progress.id', 'DESC')
+            ->get()
+            ->result();
+    }
+
+
     public function get_by_id($id)
     {
         return $this->db

@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="<?= base_url() ?>template/assets/css/style.css">
 </head>
 <body class="bg-light-custom">
-    <?php foreach ($lessons as $key => $value) {
+    <?php 
+    foreach ($lessons as $key => $value) {
         if ($value->slug == $slugurl) {
             $judulCourse = $value->judul_course; 
             $slugCourse = $value->slug_course;
@@ -24,6 +25,12 @@
             $idMateri = $value->id; 
             $idCourse = $value->course_id; 
         }
+    foreach ($profile as $key => $value) {
+      if ($this->session->userdata('id_user') == $value->id_user) {
+        $foto = $value->foto;
+        $nama = $value->nama;
+      }
+    }
     } ?>
   <!-- Minimal Header -->
   <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
@@ -44,12 +51,12 @@
         
         <div id="user-nav-items" class="dropdown">
           <a class="d-flex align-items-center text-decoration-none dropdown-toggle gap-2" href="#" role="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <img id="nav-user-avatar" src="<?= $this->session->userdata('foto') ? $this->session->userdata('foto') : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60' ?>" alt="Avatar" class="rounded-circle" style="width: 38px; height: 38px; object-fit: cover;">
+            <img id="nav-user-avatar" src="<?= $foto ?>" alt="Avatar" class="rounded-circle" style="width: 38px; height: 38px; object-fit: cover;">
             <span id="nav-user-name" class="fw-semibold text-color d-none d-sm-inline"><?= $this->session->userdata('nama') ? $this->session->userdata('nama') : 'Budi Pratama' ?></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2" aria-labelledby="profileDropdown" style="background-color: var(--card-bg);">
             <li><a class="dropdown-item py-2 fw-medium" href="<?= base_url('dashboard') ?>"><i class="fa-solid fa-gauge me-2 text-primary-custom"></i>Dashboard Saya</a></li>
-            <li><a class="dropdown-item py-2 fw-medium" href="<?= base_url('courses') ?>"><i class="fa-solid fa-book-open me-2 text-primary-custom"></i>Kelas Saya</a></li>
+            <li><a class="dropdown-item py-2 fw-medium" href="<?= base_url('mycourses') ?>"><i class="fa-solid fa-book-open me-2 text-primary-custom"></i>Kelas Saya</a></li>
             <li><hr class="dropdown-divider border-secondary-subtle"></li>
             <li><a class="dropdown-item py-2 fw-medium text-danger" href="<?= base_url('auth/logout') ?>"><i class="fa-solid fa-right-from-bracket me-2"></i>Keluar</a></li>
           </ul>

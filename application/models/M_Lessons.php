@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_Lessons extends CI_Model
+class M_lessons extends CI_Model
 {
     private $table = 'lessons';
 
@@ -19,18 +19,32 @@ class M_Lessons extends CI_Model
             ->update($this->table, $data);
     }
 
-    // GET semua data lesson dengan JOIN ke courses
-    public function get_all()
+    // GET semua data lesson dengan JOIN ke courses dan opsional ke lesson_progress untuk user tertentu
+    public function get_all($user_id = null)
     {
+        $this->db->select('lessons.*, courses.judul as judul_course, courses.slug as slug_course');
+        $this->db->from('lessons');
+        $this->db->join('courses', 'courses.id = lessons.course_id');
+        
+        if ($user_id !== null) {
+            $this->db->select('lesson_progress.status as progress_status, lesson_progress.completed_at');
+            $this->db->join('lesson_progress', 'lesson_progress.lesson_id = lessons.id AND lesson_progress.user_id = ' . (int)$user_id, 'left');
+        }
+
         return $this->db
-            ->select('lessons.*, courses.judul as judul_course, courses.slug as slug_course')
-            ->from('lessons')
-            ->join('courses', 'courses.id = lessons.course_id')
             ->order_by('lessons.course_id', 'ASC')
             ->order_by('lessons.urutan', 'ASC')
             ->get()
             ->result();
     }
+
+    // GET lessons dengan progress user tertentu (helper method)
+    public function get_lessons_with_progress($user_id)
+    {
+        return $this->get_all($user_id);
+    }
+
+
 
     // GET data by ID
     public function get_by_id($id)

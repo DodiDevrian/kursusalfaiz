@@ -5,6 +5,7 @@ class Home extends CI_Controller
     public function __construct(){
 		parent ::__construct();
         $this->load->model('m_courses');
+        $this->load->model('m_user');
 
 		// $this->load->helpers(['menuAktif']);
 		// $this->load->helpers('text');
@@ -20,6 +21,7 @@ class Home extends CI_Controller
             'title'                 => 'Kursus Online',
             'title2'                => 'Belajar Gratis',
             'get3'        => $this->m_courses->get_3(),
+            'profile'               => $this->m_user->get_all(),
             'isi'                   => 'v_home'
         );
         $this->load->view('layout/v_wrapper', $data, FALSE);
