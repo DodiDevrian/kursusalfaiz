@@ -8,7 +8,7 @@
           <p class="lead mb-4 text-white-50" style="font-weight: 300;">Persiapan matang menghadapi UTBK-SNBT, Seleksi Kompetensi Dasar (SKD) Sekolah Kedinasan, dan Seleksi CPNS dengan materi terstruktur gratis terbaik.</p>
           <div class="d-flex flex-column flex-sm-row gap-3">
             <a href="auth/login" class="btn btn-gold-custom px-5 py-3 font-heading text-white border-0 bg-gold-custom" style="font-weight: 600; letter-spacing: 1px;">MULAI BELAJAR</a>
-            <a href="courses" class="btn btn-outline-light px-5 py-3 font-heading border-2" style="font-weight: 600; letter-spacing: 1px;">LIHAT KELAS</a>
+            <a href="courses" class="btn btn-outline-light px-5 py-3" style="font-family: var(--font-heading); font-weight: 600; letter-spacing: 1px; border-width: 2px;">LIHAT KELAS</a>
           </div>
         </div>
         <div class="col-lg-6 text-center text-lg-end">

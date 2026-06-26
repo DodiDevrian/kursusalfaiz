@@ -12,7 +12,7 @@ class Course_detail extends CI_Controller
         $this->load->model('m_lessons');
         $this->load->model('m_user');
 
-        if ($this->session->userdata('role')!='user') {
+        if ($this->session->userdata('role')=='') {
 			$this->session->set_flashdata('pesan', 'Anda Belum Melakukan Login, Silahkan Login Terlebih Dahulu!');
 			redirect('auth/login');
 		}

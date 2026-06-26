@@ -44,7 +44,25 @@ class M_lessons extends CI_Model
         return $this->get_all($user_id);
     }
 
+    public function get_bookmarks($user_id)
+    {
+        return $this->db
+            ->select('bookmarks.*, lessons.judul, lessons.slug, courses.judul as judul_course, courses.slug as slug_course')
+            ->from('bookmarks')
+            ->join('lessons', 'lessons.id = bookmarks.lesson_id')
+            ->join('courses', 'courses.id = lessons.course_id')
+            ->where('bookmarks.user_id', $user_id)
+            ->order_by('bookmarks.id', 'DESC')
+            ->get()
+            ->result();
+    }
 
+    public function delete_bookmark($id)
+    {
+        return $this->db
+            ->where('id', $id)
+            ->delete('bookmarks');
+    }
 
     // GET data by ID
     public function get_by_id($id)

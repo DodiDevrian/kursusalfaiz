@@ -24,4 +24,16 @@ class M_user extends CI_Model{
         $this->db->update('users', $data);
     }
 
+    public function update_status($id, $status)
+    {
+        $this->db->where('id_user', $id);
+        $this->db->update('users', array('status' => $status));
+    }
+
+    public function delete_user($id)
+    {
+        $this->db->where('id_user', $id);
+        $this->db->delete('users');
+    }
+
 }

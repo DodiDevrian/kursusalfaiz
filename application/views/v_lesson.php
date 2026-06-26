@@ -12,26 +12,29 @@
 </head>
 <body class="bg-light-custom">
     <?php 
-    foreach ($lessons as $key => $value) {
-        if ($value->slug == $slugurl) {
-            $judulCourse = $value->judul_course; 
-            $slugCourse = $value->slug_course;
-            $judulMateri = $value->judul; 
-            $slugMateri = $value->slug; 
-            $urutanMateri = $value->urutan; 
-            $videoMateri = $value->video_youtube; 
-            $linkMateri = $value->pdf; 
-            $deskripsiMateri = $value->deskripsi; 
-            $idMateri = $value->id; 
-            $idCourse = $value->course_id; 
-        }
-    foreach ($profile as $key => $value) {
-      if ($this->session->userdata('id_user') == $value->id_user) {
-        $foto = $value->foto;
-        $nama = $value->nama;
+    // Extract current lesson data from the $current_lesson object passed by controller
+    $judulCourse = $current_lesson->judul_course; 
+    $slugCourse = $current_lesson->slug_course;
+    $judulMateri = $current_lesson->judul; 
+    $slugMateri = $current_lesson->slug; 
+    $urutanMateri = $current_lesson->urutan; 
+    $videoMateri = $current_lesson->video_youtube; 
+    $linkMateri = $current_lesson->pdf; 
+    $deskripsiMateri = $current_lesson->deskripsi; 
+    $idMateri = $current_lesson->id; 
+    $idCourse = $current_lesson->course_id; 
+
+    // Find current user's profile info
+    $foto = '';
+    $nama = '';
+    foreach ($profile as $u) {
+      if ($this->session->userdata('id_user') == $u->id_user) {
+        $foto = $u->foto;
+        $nama = $u->nama;
+        break;
       }
     }
-    } ?>
+    ?>
   <!-- Minimal Header -->
   <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
     <div class="container-fluid px-lg-5">
@@ -121,13 +124,13 @@
           </div>
 
           <!-- Discussion Section -->
-          <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
+          <div class="p-4 border border-color rounded-3 bg-white mb-4" style="background-color: var(--card-bg);">
             <h3 class="font-heading h5 mb-3 border-bottom pb-2"><i class="fa-solid fa-comments me-2 text-primary-custom"></i>Diskusi & Komentar</h3>
             
             <!-- Comment Input Box -->
             <div id="comment-input-area" class="mb-4">
               <div class="d-flex gap-3">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="comment-avatar" alt="Avatar">
+                <img src="<?= $foto ? $foto : 'https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png' ?>" class="comment-avatar" alt="Avatar" style="width: 42px; height: 42px; object-fit: cover; border-radius: 50%;">
                 <div class="flex-grow-1">
                   <div class="input-group">
                     <textarea class="form-control form-control-custom" rows="2" placeholder="Tulis komentar atau pertanyaan Anda..." id="main-comment-text"></textarea>
@@ -141,50 +144,63 @@
 
             <!-- List Comments -->
             <div class="comment-list" id="comments-container">
-              <!-- Comment 1 -->
-              <div class="d-flex gap-3 comment-item" id="comment-1">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="comment-avatar mt-1" alt="Avatar">
-                <div class="flex-grow-1">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0 fw-semibold text-color small">Budi Pratama</h6>
-                    <span class="text-muted small" style="font-size:0.75rem;">22 Juni 2026 10:30</span>
-                  </div>
-                  <p class="text-muted small mb-0 mt-1">Sangat membantu kak pembahasannya! Jadi paham konsep Silogisme.</p>
-                  
-                  <div class="mt-2 d-flex gap-2">
-                    <button class="btn btn-link btn-sm text-gold p-0 text-decoration-none"><i class="fa-solid fa-reply me-1"></i> Balas</button>
-                  </div>
-                  
-                  <!-- Replies -->
-                  <div class="reply-list">
-                    <div class="d-flex gap-3 mt-3 comment-item">
-                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60" class="comment-avatar mt-1" alt="Avatar">
-                      <div class="flex-grow-1">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h6 class="mb-0 fw-semibold text-color small">Al Faiz Admin <span class="badge bg-danger text-white small" style="font-size:0.6rem; vertical-align:middle; padding:3px 6px;">ADMIN</span></h6>
-                          <span class="text-muted small" style="font-size:0.75rem;">22 Juni 2026 11:00</span>
+              <?php if (empty($comments)) { ?>
+                <div class="text-center py-4 text-muted small" id="no-comments-placeholder">
+                  Belum ada komentar untuk materi ini. Mari mulai diskusinya!
+                </div>
+              <?php } else { ?>
+                <?php foreach ($comments as $comment) { ?>
+                  <!-- Parent Comment -->
+                  <div class="d-flex gap-3 comment-item mt-3 pt-3 border-top border-secondary-subtle" id="comment-<?= $comment->id ?>">
+                    <img src="<?= $comment->foto ? $comment->foto : 'https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png' ?>" class="comment-avatar mt-1" alt="Avatar" style="width: 36px; height: 36px; object-fit: cover; border-radius: 50%;">
+                    <div class="flex-grow-1">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 fw-semibold text-color small">
+                          <?= htmlspecialchars($comment->nama) ?>
+                          <?php if ($comment->role == 'admin') { ?>
+                            <span class="badge bg-danger text-white small" style="font-size:0.6rem; vertical-align:middle; padding:3px 6px;">ADMIN</span>
+                          <?php } ?>
+                        </h6>
+                        <span class="text-muted small" style="font-size:0.75rem;"><?= date('d M Y H:i', strtotime($comment->created_at)) ?></span>
+                      </div>
+                      <p class="text-muted small mb-0 mt-1"><?= htmlspecialchars($comment->komentar) ?></p>
+                      
+                      <div class="mt-2 d-flex gap-2">
+                        <button class="btn btn-link btn-sm text-gold p-0 text-decoration-none reply-btn" data-comment-id="<?= $comment->id ?>"><i class="fa-solid fa-reply me-1"></i> Balas</button>
+                      </div>
+                      
+                      <!-- Reply input box (hidden by default) -->
+                      <div class="reply-input-box d-none mt-2" id="reply-box-<?= $comment->id ?>">
+                        <div class="d-flex gap-2 mt-2">
+                          <textarea class="form-control form-control-custom reply-textarea" rows="1" placeholder="Tulis balasan Anda..." id="reply-text-<?= $comment->id ?>"></textarea>
+                          <button class="btn btn-primary-custom btn-sm px-3 submit-reply-btn border-0 bg-primary-custom text-white" data-parent-id="<?= $comment->id ?>">Kirim</button>
                         </div>
-                        <p class="text-muted small mb-0 mt-1">Sama-sama Budi! Semangat terus belajarnya ya, persiapkan matang-matang.</p>
+                      </div>
+
+                      <!-- Replies -->
+                      <div class="reply-list">
+                        <?php foreach ($comment->replies as $reply) { ?>
+                          <div class="d-flex gap-3 mt-3 comment-item">
+                            <img src="<?= $reply->foto ? $reply->foto : 'https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png' ?>" class="comment-avatar mt-1" alt="Avatar" style="width: 32px; height: 32px; object-fit: cover; border-radius: 50%;">
+                            <div class="flex-grow-1">
+                              <div class="d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0 fw-semibold text-color small">
+                                  <?= htmlspecialchars($reply->nama) ?>
+                                  <?php if ($reply->role == 'admin') { ?>
+                                    <span class="badge bg-danger text-white small" style="font-size:0.6rem; vertical-align:middle; padding:3px 6px;">ADMIN</span>
+                                  <?php } ?>
+                                </h6>
+                                <span class="text-muted small" style="font-size:0.75rem;"><?= date('d M Y H:i', strtotime($reply->created_at)) ?></span>
+                              </div>
+                              <p class="text-muted small mb-0 mt-1"><?= htmlspecialchars($reply->komentar) ?></p>
+                            </div>
+                          </div>
+                        <?php } ?>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Comment 2 -->
-              <div class="d-flex gap-3 comment-item mt-3 pt-3 border-top border-secondary-subtle" id="comment-2">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="comment-avatar mt-1" alt="Avatar">
-                <div class="flex-grow-1">
-                  <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="mb-0 fw-semibold text-color small">Budi Pratama</h6>
-                    <span class="text-muted small" style="font-size:0.75rem;">23 Juni 2026 08:15</span>
-                  </div>
-                  <p class="text-muted small mb-0 mt-1">Kak, apakah ada PDF latihan soal tambahannya?</p>
-                  <div class="mt-2 d-flex gap-2">
-                    <button class="btn btn-link btn-sm text-gold p-0 text-decoration-none"><i class="fa-solid fa-reply me-1"></i> Balas</button>
-                  </div>
-                </div>
-              </div>
+                <?php } ?>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -274,33 +290,48 @@
         });
       });
 
-      // Mock Comments Adding
+      // Submit Main Comment via AJAX
       $('#submit-comment-btn').on('click', function() {
         const text = $('#main-comment-text').val().trim();
-        if (text) {
-          const date = new Date().toLocaleDateString('id-ID', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          });
+        if (!text) return;
 
-          const newComment = `
-            <div class="d-flex gap-3 comment-item mt-3 pt-3 border-top border-secondary-subtle">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="comment-avatar mt-1" alt="Avatar">
-              <div class="flex-grow-1">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h6 class="mb-0 fw-semibold text-color small">Budi Pratama</h6>
-                  <span class="text-muted small" style="font-size:0.75rem;">${date}</span>
-                </div>
-                <p class="text-muted small mb-0 mt-1">${text}</p>
-              </div>
-            </div>
-          `;
-          $('#comments-container').prepend(newComment);
-          $('#main-comment-text').val('');
-        }
+        $.post('<?= base_url("lesson/add_comment") ?>', {
+          lesson_id: '<?= $idMateri ?>',
+          komentar: text
+        }, function(response) {
+          const res = JSON.parse(response);
+          if (res.status === 'success') {
+            location.reload();
+          } else {
+            alert(res.message);
+          }
+        });
+      });
+
+      // Toggle Reply Input Box
+      $(document).on('click', '.reply-btn', function() {
+        const commentId = $(this).data('comment-id');
+        $(`#reply-box-${commentId}`).toggleClass('d-none');
+      });
+
+      // Submit Reply via AJAX
+      $(document).on('click', '.submit-reply-btn', function() {
+        const parentId = $(this).data('parent-id');
+        const text = $(`#reply-text-${parentId}`).val().trim();
+        if (!text) return;
+
+        $.post('<?= base_url("lesson/add_comment") ?>', {
+          lesson_id: '<?= $idMateri ?>',
+          komentar: text,
+          parent_id: parentId
+        }, function(response) {
+          const res = JSON.parse(response);
+          if (res.status === 'success') {
+            location.reload();
+          } else {
+            alert(res.message);
+          }
+        });
       });
     });
   </script>

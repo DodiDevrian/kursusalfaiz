@@ -20,11 +20,19 @@ class Bookmark extends CI_Controller
     public function index()
     {
         $data = array(
-            'title'                 => 'Bookmark',
-            'title2'                => 'Al Faiz',
-            'profile'               => $this->m_user->get_all(),
+            'title'         => 'Bookmark',
+            'title2'        => 'Al Faiz',
+            'profile'       => $this->m_user->get_all(),
+            'bookmarks'     => $this->m_lessons->get_bookmarks($this->session->userdata('id_user')),
             'isi'           => 'v_bookmark'
         );
         $this->load->view('layout_dash/v_wrapper', $data, FALSE);
+    }
+
+    public function delete($id)
+    {
+        $this->m_lessons->delete_bookmark($id);
+        $this->session->set_flashdata('pesan', 'Bookmark berhasil dihapus');
+        redirect('bookmark');
     }
 }  

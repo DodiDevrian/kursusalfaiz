@@ -11,8 +11,9 @@ class Lesson extends CI_Controller
         $this->load->model('m_courses');
         $this->load->model('m_lessons');
         $this->load->model('m_user');
+        $this->load->model('m_comments');
 
-        if ($this->session->userdata('role')!='user') {
+        if ($this->session->userdata('role')=='') {
 			$this->session->set_flashdata('pesan', 'Anda Belum Melakukan Login, Silahkan Login Terlebih Dahulu!');
 			redirect('auth/login');
 		}
@@ -90,6 +91,24 @@ class Lesson extends CI_Controller
             $progress_percent = round((count($completed_ids) / $total_lessons_count) * 100);
         }
 
+        // Fetch lesson comments
+        $raw_comments = $this->m_comments->get_lesson_comments($current_lesson->id);
+        $comments = [];
+        $replies = [];
+        foreach ($raw_comments as $c) {
+            if ($c->parent_id === null) {
+                $comments[$c->id] = $c;
+                $comments[$c->id]->replies = [];
+            } else {
+                $replies[] = $c;
+            }
+        }
+        foreach ($replies as $r) {
+            if (isset($comments[$r->parent_id])) {
+                $comments[$r->parent_id]->replies[] = $r;
+            }
+        }
+
         $data = array(
             'title'   => 'Lesson',
             'title2'  => 'Al Faiz',
@@ -102,7 +121,8 @@ class Lesson extends CI_Controller
             'is_completed' => $is_completed,
             'profile' => $this->m_user->get_all(),
             'completed_ids' => $completed_ids,
-            'progress_percent' => $progress_percent
+            'progress_percent' => $progress_percent,
+            'comments' => $comments
         );
         $this->load->view('v_lesson', $data, FALSE);
     }
@@ -215,5 +235,38 @@ class Lesson extends CI_Controller
             'action' => $status,
             'progress_percent' => $progress_percent
         ]);
+    }
+
+    public function add_comment()
+    {
+        $user_id = $this->session->userdata('id_user');
+        if (!$user_id) {
+            echo json_encode(['status' => 'error', 'message' => 'Anda harus login terlebih dahulu.']);
+            return;
+        }
+
+        $lesson_id = $this->input->post('lesson_id');
+        $komentar = $this->input->post('komentar');
+        $parent_id = $this->input->post('parent_id');
+
+        if (empty($komentar)) {
+            echo json_encode(['status' => 'error', 'message' => 'Komentar tidak boleh kosong.']);
+            return;
+        }
+
+        $data = [
+            'lesson_id' => $lesson_id,
+            'user_id' => $user_id,
+            'komentar' => $komentar,
+            'parent_id' => !empty($parent_id) ? $parent_id : null,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($this->m_comments->insert_comment($data)) {
+            echo json_encode(['status' => 'success', 'message' => 'Komentar berhasil dikirim.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Gagal mengirim komentar.']);
+        }
     }
 }
