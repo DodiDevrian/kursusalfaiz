@@ -40,6 +40,8 @@
                 </tr>
               </thead>
               <tbody id="comments-tbody">
+                <?php foreach ($balasan as $key => $value) { ?>
+                  <?php if($value->parent_id == $reply){ ?>
                 <tr>
                   <td>
                     <div class="d-flex align-items-center gap-2">
@@ -60,7 +62,8 @@
                     <a href="<?= base_url('admin/comments/delete/' . $value->id) ?>" class="btn btn-outline-danger btn-sm rounded-pill px-3 delete-comment-btn">Hapus</a>
                   </td>
                 </tr>
-
+                  <?php } ?>
+                <?php } ?>
               </tbody>
             </table>
           </div>

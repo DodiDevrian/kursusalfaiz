@@ -224,44 +224,21 @@
       </div>
       <div class="accordion" id="accordionFaq">
         <!-- FAQ 1 -->
+         <?php foreach ($faq as $key => $value) { ?>
         <div class="accordion-item border border-color rounded-3 overflow-hidden mb-3 bg-white" style="background-color: var(--card-bg);">
-          <h3 class="accordion-header" id="headingFaq-1">
-            <button class="accordion-button font-heading py-3" style="color: var(--text-color); font-weight:600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq-1" aria-expanded="true" aria-controls="collapseFaq-1">
-              Apakah seluruh pembelajaran di Al Faiz benar-benar gratis?
+          <h3 class="accordion-header" id="headingFaq-<?= $value->id ?>">
+            <button class="accordion-button font-heading collapsed py-3" style="color: var(--text-color); font-weight:600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq-<?= $value->id ?>" aria-expanded="true" aria-controls="collapseFaq-<?= $value->id ?>">
+              <?= $value->pertanyaan ?>
             </button>
           </h3>
-          <div id="collapseFaq-1" class="accordion-collapse collapse show" aria-labelledby="headingFaq-1" data-bs-parent="#accordionFaq">
+          <div id="collapseFaq-<?= $value->id ?>" class="accordion-collapse collapse" aria-labelledby="headingFaq-<?= $value->id ?>" data-bs-parent="#accordionFaq">
             <div class="accordion-body text-muted small pt-0 pb-3">
-              Ya, betul sekali. Visi utama Al Faiz adalah menyediakan akses pembelajaran berkualitas secara gratis untuk seluruh pejuang UTBK, SKD, dan CPNS di Indonesia.
+              <?= $value->jawaban ?>
             </div>
           </div>
         </div>
-        <!-- FAQ 2 -->
-        <div class="accordion-item border border-color rounded-3 overflow-hidden mb-3 bg-white" style="background-color: var(--card-bg);">
-          <h3 class="accordion-header" id="headingFaq-2">
-            <button class="accordion-button font-heading collapsed py-3" style="color: var(--text-color); font-weight:600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq-2" aria-expanded="false" aria-controls="collapseFaq-2">
-              Bagaimana cara mendownload modul materi PDF?
-            </button>
-          </h3>
-          <div id="collapseFaq-2" class="accordion-collapse collapse" aria-labelledby="headingFaq-2" data-bs-parent="#accordionFaq">
-            <div class="accordion-body text-muted small pt-0 pb-3">
-              Kamu harus mendaftar dan masuk (login) ke dalam akun terlebih dahulu. Setelah itu, buka pelajaran (lesson) yang kamu tuju, dan link download PDF akan aktif di bawah video pembelajaran.
-            </div>
-          </div>
-        </div>
-        <!-- FAQ 3 -->
-        <div class="accordion-item border border-color rounded-3 overflow-hidden mb-3 bg-white" style="background-color: var(--card-bg);">
-          <h3 class="accordion-header" id="headingFaq-3">
-            <button class="accordion-button font-heading collapsed py-3" style="color: var(--text-color); font-weight:600;" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq-3" aria-expanded="false" aria-controls="collapseFaq-3">
-              Apakah ada Try Out simulasi?
-            </button>
-          </h3>
-          <div id="collapseFaq-3" class="accordion-collapse collapse" aria-labelledby="headingFaq-3" data-bs-parent="#accordionFaq">
-            <div class="accordion-body text-muted small pt-0 pb-3">
-              Fitur Try Out Online dan Bank Soal saat ini sedang direncanakan untuk dirilis pada versi 1.5 mendatang. Ikuti terus update di media sosial kami!
-            </div>
-          </div>
-        </div>
+        <?php } ?>
+
       </div>
     </div>
   </section>

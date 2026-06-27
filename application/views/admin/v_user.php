@@ -38,7 +38,7 @@
                 <tr>
                   <td>
                     <div class="d-flex align-items-center gap-2"> 
-                      <img src="<?= $value->foto ?>" class="rounded-circle" style="width:36px; height:36px; object-fit:cover;" alt="User Avatar">
+                      <img src="<?= $value->foto ? $value->foto : 'https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png' ?>" class="rounded-circle" style="width:36px; height:36px; object-fit:cover;" alt="User Avatar">
                       <div>
                         <h6 class="mb-0 fw-semibold text-color small"><?= $value->nama ?></h6>
                         <span class="text-muted" style="font-size:0.7rem;">Terdaftar: <?= $value->created_at ?></span>

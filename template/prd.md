@@ -397,22 +397,7 @@ Black Box Testing:
 
 ---
 
-# 20. Future Development
-
-Versi 1.5
-
-- Bank Soal
-- Try Out Online
-
-Versi 2.0
-
-- Ranking
-- Sertifikat
-- Notifikasi
-
----
-
-# 21. Success Metrics
+# 20. Success Metrics
 
 - Total User
 - Total Course

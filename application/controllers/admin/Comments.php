@@ -33,6 +33,7 @@ class Comments extends CI_Controller
             'title' => 'Admin',
             'title2' => 'Reply Comments',
             'comments' => $this->m_comments->get_all(),
+            'balasan' => $this->m_comments->get_all(),
             'reply' => $this->input->get('reply'),
             'isi'   => 'admin/v_ans_comments'
         );
