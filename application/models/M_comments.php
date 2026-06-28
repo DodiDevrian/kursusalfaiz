@@ -60,4 +60,18 @@ class M_comments extends CI_Model
         $this->db->limit(3);
         return $this->db->get()->result();
     }
+
+    public function get_user_comments($user_id, $limit = 3)
+    {
+        return $this->db
+            ->select('comments.*, users.nama, users.foto, users.role, lessons.judul, lessons.slug as lesson_slug')
+            ->from($this->table)
+            ->join('users', 'users.id_user = comments.user_id')
+            ->join('lessons', 'lessons.id = comments.lesson_id')
+            ->where('comments.user_id', $user_id)
+            ->order_by('comments.created_at', 'desc')
+            ->limit($limit)
+            ->get()
+            ->result();
+    }
 }

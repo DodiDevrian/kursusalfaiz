@@ -86,4 +86,74 @@ class M_courses extends CI_Model
 
         return $this->db->get($this->table)->num_rows() > 0;
     }
+
+    public function get_latest_course_progress($user_id)
+    {
+        // 1. Get the course from course_progress ordered by updated_at DESC
+        $recent_course = $this->db
+            ->select('courses.*, course_progress.progress as course_progress')
+            ->from('course_progress')
+            ->join('courses', 'courses.id = course_progress.course_id')
+            ->where('course_progress.user_id', $user_id)
+            ->order_by('course_progress.updated_at', 'DESC')
+            ->limit(1)
+            ->get()
+            ->row();
+
+        if (!$recent_course) {
+            return null;
+        }
+
+        // 2. Get all lessons for this course ordered by urutan ASC
+        $lessons = $this->db
+            ->order_by('urutan', 'ASC')
+            ->get_where('lessons', ['course_id' => $recent_course->id])
+            ->result();
+
+        $recent_lesson = null;
+        if (!empty($lessons)) {
+            // Get completed lesson IDs
+            $completed_progress = $this->db
+                ->select('lesson_id')
+                ->from('lesson_progress')
+                ->join('lessons', 'lessons.id = lesson_progress.lesson_id')
+                ->where([
+                    'lesson_progress.user_id' => $user_id,
+                    'lessons.course_id' => $recent_course->id,
+                    'lesson_progress.status' => 'selesai'
+                ])
+                ->get()
+                ->result_array();
+
+            $completed_ids = array_column($completed_progress, 'lesson_id');
+
+            // Find the first uncompleted lesson
+            foreach ($lessons as $l) {
+                if (!in_array($l->id, $completed_ids)) {
+                    $recent_lesson = $l;
+                    break;
+                }
+            }
+
+            // Fallback to the first lesson if all completed
+            if (!$recent_lesson) {
+                $recent_lesson = $lessons[0];
+            }
+        }
+
+        return [
+            'course' => $recent_course,
+            'lesson' => $recent_lesson
+        ];
+    }
+
+    public function get_all_progress(){
+        return $this->db
+            ->select('course_progress.*, courses.judul')
+            ->from('course_progress')
+            ->join('courses', 'courses.id = course_progress.course_id')
+            ->order_by('course_progress.id', 'DESC')
+            ->get()
+            ->result();
+    }
 }
