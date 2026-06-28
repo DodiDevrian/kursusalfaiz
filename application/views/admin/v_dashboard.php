@@ -1,3 +1,25 @@
+<?php 
+  $jml_user = 0;
+  foreach ($alluser as $key => $value) {
+    $jml_user++;
+  }
+
+  $jml_courses = 0;
+  foreach ($courses as $key => $value) {
+    $jml_courses++;
+  }
+
+  $jml_lessons = 0;
+  foreach ($lessons as $key => $value) {
+    $jml_lessons++;
+  }
+
+  $jml_comments = 0;
+  foreach ($allcomments as $key => $value) {
+    $jml_comments++;
+  }
+?>
+
 <div class="col-lg-9 col-md-8 p-4 p-lg-5">
         <div class="mb-4">
           <span class="text-gold font-heading fw-semibold small" style="letter-spacing: 1px;">KENDALI UTAMA</span>
@@ -13,7 +35,7 @@
                 <span class="text-muted small fw-medium">TOTAL SISWA</span>
                 <span class="fs-4 text-primary-custom"><i class="fa-solid fa-users"></i></span>
               </div>
-              <h2 class="font-heading text-color mb-0">124</h2>
+              <h2 class="font-heading text-color mb-0"><?= $jml_user ?></h2>
               <span class="text-success small"><i class="fa-solid fa-arrow-up me-1"></i> Aktif</span>
             </div>
           </div>
@@ -23,7 +45,7 @@
                 <span class="text-muted small fw-medium">TOTAL KELAS</span>
                 <span class="fs-4 text-success"><i class="fa-solid fa-graduation-cap"></i></span>
               </div>
-              <h2 class="font-heading text-color mb-0">10</h2>
+              <h2 class="font-heading text-color mb-0"><?= $jml_courses ?></h2>
               <span class="text-muted small">Kelas Pembelajaran</span>
             </div>
           </div>
@@ -33,7 +55,7 @@
                 <span class="text-muted small fw-medium">MATERI VIDEO</span>
                 <span class="fs-4 text-warning"><i class="fa-solid fa-video"></i></span>
               </div>
-              <h2 class="font-heading text-color mb-0">45</h2>
+              <h2 class="font-heading text-color mb-0"><?= $jml_lessons ?></h2>
               <span class="text-muted small">YouTube Embed</span>
             </div>
           </div>
@@ -43,7 +65,7 @@
                 <span class="text-muted small fw-medium">DISKUSI AKTIF</span>
                 <span class="fs-4 text-info"><i class="fa-solid fa-comments"></i></span>
               </div>
-              <h2 class="font-heading text-color mb-0">182</h2>
+              <h2 class="font-heading text-color mb-0"><?= $jml_comments ?></h2>
               <span class="text-muted small">Komentar Terjawab</span>
             </div>
           </div>
@@ -72,36 +94,19 @@
                     </tr>
                   </thead>
                   <tbody id="recent-users-tbody">
+                    <?php foreach ($newuser as $user) { ?>
                     <tr>
                       <td>
                         <div class="d-flex align-items-center gap-2">
-                          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="rounded-circle" style="width:30px; height:30px; object-fit:cover;">
-                          <span class="fw-medium text-color small">Budi Pratama</span>
+                          <img src="<?= $user->foto ? $user->foto : 'https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png' ?>" class="rounded-circle" style="width:30px; height:30px; object-fit:cover;">
+                          <span class="fw-medium text-color small"><?= $user->nama ?></span>
                         </div>
                       </td>
-                      <td><span class="text-muted small">user@alfaiz.com</span></td>
+                      <td><span class="text-muted small"><?= $user->email ?></span></td>
                       <td><span class="badge bg-success-subtle text-success border border-success-subtle small">Aktif</span></td>
                     </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-2">
-                          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=60" class="rounded-circle" style="width:30px; height:30px; object-fit:cover;">
-                          <span class="fw-medium text-color small">Ahmad Dahlan</span>
-                        </div>
-                      </td>
-                      <td><span class="text-muted small">dahlan@gmail.com</span></td>
-                      <td><span class="badge bg-success-subtle text-success border border-success-subtle small">Aktif</span></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex align-items-center gap-2">
-                          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=60" class="rounded-circle" style="width:30px; height:30px; object-fit:cover;">
-                          <span class="fw-medium text-color small">Siti Aminah</span>
-                        </div>
-                      </td>
-                      <td><span class="text-muted small">siti@outlook.com</span></td>
-                      <td><span class="badge bg-success-subtle text-success border border-success-subtle small">Aktif</span></td>
-                    </tr>
+                    <?php } ?>
+
                   </tbody>
                 </table>
               </div>
@@ -113,27 +118,18 @@
             <h3 class="font-heading h5 mb-3">Aktivitas Komentar Baru</h3>
             <div class="p-4 border border-color rounded-3 bg-white" style="background-color: var(--card-bg);">
               <div class="list-group list-group-flush" id="recent-comments-list">
+                <?php foreach ($newcomments as $comment) { ?>
                 <div class="list-group-item d-flex gap-3 py-3 border-secondary-subtle bg-transparent">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="rounded-circle" style="width:36px; height:36px; object-fit:cover;">
+                  <img src="https://res.cloudinary.com/dhtspwbzr/image/upload/v1782363994/3da39-no-user-image-icon-27_thxfzr.png" class="rounded-circle" style="width:36px; height:36px; object-fit:cover;">
                   <div class="flex-grow-1">
                     <div class="d-flex justify-content-between">
-                      <h6 class="mb-0 fw-semibold text-color small">Budi Pratama</h6>
-                      <span class="text-muted" style="font-size:0.7rem;"><i class="fa-solid fa-chalkboard-user me-1"></i> Pengantar Logika...</span>
+                      <h6 class="mb-0 fw-semibold text-color small"><?= $comment->nama ?></h6>
+                      <span class="text-muted" style="font-size:0.7rem;"><i class="fa-solid fa-chalkboard-user me-1"></i> <?= substr($comment->judul, 0, 15), "..." ?></span>
                     </div>
-                    <p class="text-muted small mb-0 mt-1" style="font-size:0.8rem;">"Sangat membantu kak pembahasannya! Jadi paham konsep Silogisme."</p>
+                    <p class="text-muted small mb-0 mt-1" style="font-size:0.8rem;"><?= $comment->komentar ?></p>
                   </div>
                 </div>
-
-                <div class="list-group-item d-flex gap-3 py-3 border-secondary-subtle bg-transparent">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=60" class="rounded-circle" style="width:36px; height:36px; object-fit:cover;">
-                  <div class="flex-grow-1">
-                    <div class="d-flex justify-content-between">
-                      <h6 class="mb-0 fw-semibold text-color small">Budi Pratama</h6>
-                      <span class="text-muted" style="font-size:0.7rem;"><i class="fa-solid fa-chalkboard-user me-1"></i> Pengantar Logika...</span>
-                    </div>
-                    <p class="text-muted small mb-0 mt-1" style="font-size:0.8rem;">"Kak, apakah ada PDF latihan soal tambahannya?"</p>
-                  </div>
-                </div>
+                <?php } ?>
               </div>
             </div>
           </div>

@@ -36,4 +36,13 @@ class M_user extends CI_Model{
         $this->db->delete('users');
     }
 
+    public function get_3()
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->order_by('id_user', 'desc');
+        $this->db->limit(3);
+        return $this->db->get()->result();
+    }
+
 }

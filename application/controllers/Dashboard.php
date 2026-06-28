@@ -19,7 +19,7 @@ class Dashboard extends CI_Controller
         $data = array(
             'title'   => 'Courses',
             'title2'  => 'Al Faiz',
-            'profile'               => $this->m_user->get_all(),
+            'profile'   => $this->m_user->get_all(),
             'courses'   => $this->m_courses->get_all(),
             'lessons'   => $this->m_lessons->get_all(),
             'categories'   => $this->m_categories->get_all(),

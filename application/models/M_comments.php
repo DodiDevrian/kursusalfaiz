@@ -49,4 +49,15 @@ class M_comments extends CI_Model
     {
         return $this->delete($id);
     }
+
+    public function get_3()
+    {
+        $this->db->select('*');
+        $this->db->from('comments');
+        $this->db->join('users', 'users.id_user = comments.user_id');
+        $this->db->join('lessons', 'lessons.id = comments.lesson_id');
+        $this->db->order_by('comments.created_at', 'desc');
+        $this->db->limit(3);
+        return $this->db->get()->result();
+    }
 }
