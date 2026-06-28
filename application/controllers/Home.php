@@ -21,6 +21,7 @@ class Home extends CI_Controller
             'title'                 => 'Kursus Online',
             'title2'                => 'Belajar Gratis',
             'get3'        => $this->m_courses->get_3(),
+            'getpopuler'  => $this->m_courses->get_populer(),
             'profile'               => $this->m_user->get_all(),
             'faq' => $this->m_faq->get_all(),
             'isi'                   => 'v_home'

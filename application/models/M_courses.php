@@ -39,16 +39,16 @@ class M_courses extends CI_Model
             ->result();
     }
 
-    // public function get_3_popular(){
-    //     return $this->db
-    //         ->select('courses.*, categories.nama_kategori')
-    //         ->from('courses')
-    //         ->join('categories', 'categories.id = courses.category_id')
-    //         ->order_by('courses.id', 'DESC')
-    //         ->limit(3)
-    //         ->get()
-    //         ->result();
-    // }
+    public function get_populer(){
+        return $this->db
+            ->select('courses.*, categories.nama_kategori')
+            ->from('courses')
+            ->join('categories', 'categories.id = courses.category_id')
+            ->order_by('courses.id', 'ASC')
+            ->limit(3)
+            ->get()
+            ->result();
+    }
 
     public function cek_course()
     {

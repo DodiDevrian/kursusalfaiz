@@ -95,16 +95,16 @@
         <a href="courses" class="text-primary-custom fw-semibold text-decoration-none small">Lihat Semua <i class="fa-solid fa-arrow-right ms-1"></i></a>
       </div>
       <div class="row g-4" id="popular-courses-list">
-        <!-- Card 1 -->
+         <?php foreach ($getpopuler as $key => $value) { ?>
         <div class="col-lg-4 col-md-6">
           <div class="course-card">
             <div class="card-img-wrapper">
-              <span class="badge-category">CPNS</span>
-              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&auto=format&fit=crop&q=60" alt="TIU CPNS">
+              <span class="badge-category"><?= $value->nama_kategori ?></span>
+              <img src="<?= $value->thumbnail ?>" alt="TIU CPNS">
             </div>
             <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Kupas Tuntas TIU CPNS 2026</h4>
-              <p class="text-muted small flex-grow-1">Persiapan intensif Tes Inteligensia Umum CPNS dengan metode pengerjaan kilat.</p>
+              <h4 class="font-heading h5 mb-2"><?= $value->judul ?></h4>
+              <p class="text-muted small flex-grow-1"><?= $value->deskripsi ?></p>
               <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
                 <span class="text-gold fw-bold">Gratis</span>
                 <a href="course-detail.html?slug=tiu-cpns" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
@@ -112,40 +112,7 @@
             </div>
           </div>
         </div>
-        <!-- Card 2 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="course-card">
-            <div class="card-img-wrapper">
-              <span class="badge-category">UTBK</span>
-              <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&auto=format&fit=crop&q=60" alt="Penalaran Matematika">
-            </div>
-            <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Penalaran Matematika</h4>
-              <p class="text-muted small flex-grow-1">Analisis data, peluang, dan pemecahan kasus kontekstual menggunakan matematika.</p>
-              <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
-                <span class="text-gold fw-bold">Gratis</span>
-                <a href="course-detail.html?slug=penalaran-matematika" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="col-lg-4 col-md-6">
-          <div class="course-card">
-            <div class="card-img-wrapper">
-              <span class="badge-category">SKD KEDINASAN</span>
-              <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&auto=format&fit=crop&q=60" alt="TIU SKD">
-            </div>
-            <div class="card-body">
-              <h4 class="font-heading h5 mb-2">Tes Inteligensia Umum (TIU) SKD</h4>
-              <p class="text-muted small flex-grow-1">Kemampuan verbal, numerik, dan figural untuk SKD Sekolah Kedinasan.</p>
-              <div class="mt-4 pt-3 border-top border-secondary-subtle d-flex justify-content-between align-items-center">
-                <span class="text-gold fw-bold">Gratis</span>
-                <a href="course-detail.html?slug=tiu-skd" class="btn btn-primary-custom btn-sm px-3">Lihat Detail</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php } ?>
       </div>
     </div>
   </section>
