@@ -22,6 +22,7 @@ class Courses extends CI_Controller
             'title' => 'Admin',
             'title2' => 'Courses',
             'courses' => $this->m_courses->get_all(),
+            'categories' => $this->m_courses->get_categories(),
             'isi'   => 'admin/v_courses'
         );
         $this->load->view('admin/layout/v_wrapper', $data, FALSE);

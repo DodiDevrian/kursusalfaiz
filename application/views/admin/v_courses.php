@@ -24,9 +24,9 @@
             <div style="min-width: 220px;">
               <select class="form-select form-control-custom border-secondary-subtle" id="filter-category">
                 <option value="all">Semua Kategori (Filter)</option>
-                <option value="UTBK">UTBK</option>
-                <option value="SKD Kedinasan">SKD Kedinasan</option>
-                <option value="CPNS">CPNS</option>
+                <?php foreach ($categories as $key => $value) { ?>
+                  <option value="<?= $value->nama_kategori ?>"><?= $value->nama_kategori ?></option>
+                <?php } ?>
               </select>
             </div>
           </div>
@@ -137,9 +137,9 @@
                         <div class="col-md-6">
                             <label for="course-category" class="form-label small text-muted">Kategori</label>
                             <select class="form-select form-control-custom" id="course-category" name="category_id" required>
-                            <option value="1">UTBK</option>
-                            <option value="2">SKD Kedinasan</option>
-                            <option value="3">CPNS</option>
+                              <?php foreach ($categories as $category): ?>
+                                <option value="<?= $category->id ?>"><?= $category->nama_kategori ?></option>
+                              <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-md-6">

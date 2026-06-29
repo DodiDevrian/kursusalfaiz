@@ -28,6 +28,15 @@ class M_courses extends CI_Model
             ->result();
     }
 
+    public function get_categories()
+    {
+        return $this->db
+            ->select('categories.*')
+            ->from('categories')
+            ->get()
+            ->result();
+    }
+
     public function get_3(){
         return $this->db
             ->select('courses.*, categories.nama_kategori')
