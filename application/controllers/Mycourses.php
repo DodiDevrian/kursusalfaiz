@@ -23,7 +23,6 @@ class Mycourses extends CI_Controller
 
         $id_user = $this->session->userdata('id_user') ? $this->session->userdata('id_user') : 2;
 
-        // Fetch course progress records for this user
         $my_progress = $this->db
             ->select('course_progress.*, courses.judul, courses.slug, courses.deskripsi, courses.thumbnail, categories.nama_kategori')
             ->from('course_progress')

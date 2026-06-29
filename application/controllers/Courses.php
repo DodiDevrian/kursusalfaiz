@@ -5,7 +5,6 @@ class Courses extends CI_Controller
     public function __construct(){
 		parent ::__construct();
 
-		// $this->load->helpers(['menuAktif']);
 		$this->load->helpers('text');
         $this->load->model('m_categories');
         $this->load->model('m_courses');
