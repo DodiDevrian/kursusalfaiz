@@ -30,7 +30,6 @@ class Courses extends CI_Controller
 
     public function simpan()
     {
-        // Ambil data dari form
         $id          = $this->input->post('id');
         $judul       = $this->input->post('judul');
         $slug        = $this->input->post('slug');
@@ -48,19 +47,16 @@ class Courses extends CI_Controller
             'deskripsi'   => $deskripsi
         ];
 
-        // INSERT
         if ($id == '') {
 
             $data['created_at'] = date('Y-m-d H:i:s');
 
             $this->db->insert('courses', $data);
 
-            // redirect setelah simpan
             $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Ditambahkan!');
             redirect('admin/courses');
 
         }
-        // UPDATE
         else {
 
             $this->db->where('id', $id);

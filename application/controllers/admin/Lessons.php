@@ -31,7 +31,6 @@ class Lessons extends CI_Controller
 
     public function simpan()
     {
-        // Ambil data dari form
         $id          = $this->input->post('id');
         $course_id   = $this->input->post('course_id');
         $judul       = $this->input->post('judul');
@@ -51,25 +50,22 @@ class Lessons extends CI_Controller
             'deskripsi'   => $deskripsi
         ];
 
-        // INSERT
         if ($id == '') {
 
             $data['created_at'] = date('Y-m-d H:i:s');
 
             $this->db->insert('lessons', $data);
 
-            // redirect setelah simpan
-            $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Ditambahkan!');
+            $this->session->set_flashdata('pesan', 'Data Lessons Berhasil Ditambahkan!');
             redirect('admin/lessons');
 
         }
-        // UPDATE
         else {
 
             $this->db->where('id', $id);
             $this->db->update('lessons', $data);
 
-            $this->session->set_flashdata('pesan', 'Data Kursus Berhasil Diupdate!');
+            $this->session->set_flashdata('pesan', 'Data Lessons Berhasil Diupdate!');
             redirect('admin/lessons');
         }
     }
